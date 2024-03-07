@@ -1,0 +1,127 @@
+<div class="div">
+    <div class="row m-2">
+        <div class="col">
+            <h1 class="text">Attestation de Salaire</h1>
+        </div>
+    </div>
+    <hr>
+    <div class="row m-2">
+        <div class="col" *ngIf="MsgError">
+            <div class="alert alert-danger" *ngIf="MsgError">
+                <p> {{MsgError}} </p>
+            </div>
+        </div>
+        <div class="col" *ngIf="MsgValid">
+            <div class="alert alert-success" *ngIf="MsgValid">
+                <p> {{MsgValid}} </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Filtre Employeur  -->
+    <div class="row m-2">
+        <form [formGroup]="FormsAttestation" (change)="find_employer_by_forms_search()">
+            <div class="col-12">
+                <div class="card">
+                    <div class="row m-2">
+                        <div class="col">
+                            <div class="input-group">
+                                <label for="" class="input-group-text">Département : </label>
+                                <select required="true" formControlName="Mc" (change)="find_Services()"
+                                    class="form-select" id="">
+                                    <option *ngFor="let dep of Department" [value]="dep"> {{dep}} </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="input-group">
+                                <label for="" class="input-group-text">Service : </label>
+                                <select required="true" formControlName="Mc2"
+                                    (change)="find_employeur_by_fonction_departement()" class="form-select" id="">
+                                    <option *ngFor="let serv of Services" [value]="serv"> {{serv}} </option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col">
+                            <div class="input-group">
+                                <label for="" class="input-group-text">Employeur : </label>
+                                <select required="true" formControlName="Mc3" class="form-select" id="">
+                                    <option *ngFor="let empl of employeur2" [value]="empl.id"> {{empl.firstname}}
+                                        {{empl.lastname}} </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="row m-2 text-center">
+        <div class="col p-3">
+            <form [formGroup]="FormsAttestation" (change)="ChangeDateToLieu()">
+
+                <div class="row">
+                    <div class="col">
+                        <div class="input-group">
+                            <label for="" class="input-group-text">Date : </label>
+                            <input type="date" formControlName="Mc4" class="form-control" id="">
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="input-group">
+                            <label for="" class="input-group-text">Directeur Général : </label>
+                            <input type="text" formControlName="DG" class="form-control" id="">
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="input-group">
+                            <label for="" class="input-group-text">Salaire Brut : </label>
+                            <input type="text" formControlName="salary" class="form-control" id="">
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-12">
+            <div class="card">
+                <div id="DataInfosEmployeur">
+                    <div class="row">
+                        <div class="col">
+                            <h1>ATTESTATION DE SALAIRE</h1>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="col" *ngIf="employeur">
+                        <p>
+                            Nous soussignés,<b> SIHA Hôtel MEDINA GARDENS</b>, sis à Arset Djenan lakhdar
+                        MARRAKECH, attestons par la présente que : <br><br>
+                        <span class="h1">Mr. <b> {{employeur.firstname}} {{employeur.lastname}} </b></span>
+                        <br><br>
+                        Immatriculé à la CNSS sous le N° {{employeur.cnss}} est employé à l’hôtel <b> MEDINA GARDENS</b> <br> à Marrakech en
+                        qualité de <b>{{employeur.fonction}}</b>  perçoit un salaire mensuel brut de <b> {{salary}} </b> DHS<br>
+                        <b>( {{salaryLETTRE}} MAD )</b> <br><br>
+                        La présente attestation est délivrée à l’intéressé sur sa demande pour servir Et valoir ce que
+                        de droit.
+                        </p>
+                    </div><br>
+                    <div class="col offset-8"><br>
+                        <p>
+                            <b>Fait à Marrakech le : </b> {{date}}
+                            <br> <b> DIRECTEUR GENERAL : </b>
+                            Mr.{{DG}}
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col p-3">
+                <button class="btn btn-danger" (click)="prin_attestation_travail()">
+                    <i class="bi bi-file-earmark-pdf"></i>
+                    Imprimer</button>
+            </div>
+        </div>
+    </div>
+
+
+</div>

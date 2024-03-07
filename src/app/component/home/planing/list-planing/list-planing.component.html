@@ -1,0 +1,126 @@
+<div>
+    <div class="row m-2">
+        <div class="col">
+            <h1 class="text">Planification du personnel</h1>
+        </div>
+    </div>
+    <hr>
+
+    <div class="row m-3">
+        <div class="col-3">
+            <div class="card">
+                <div class="row m-2">
+                    <div class="col">
+                        <form [formGroup]="FormsPlaning">
+                            <div class="input-group">
+                                <label for="" class="input-group-text">Département</label>
+                                <select formControlName="depart" class="form-select" (change)="get_employeur()" id="">
+                                    <option *ngFor="let dep of Department"  [value]="dep" > {{dep}} </option>
+                                </select>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <form [formGroup]="FormsPlaning" (submit)="Filtre_DAte_Debut_Fin()" >
+                <div class="row m-2">
+                    <div class="col">
+                        <div class="input-group">
+                            <label for="" class="input-group-text">Date Début</label>
+                            <input type="date" formControlName="Date_Debut" name="" class="form-control" id="">
+                        </div>
+                    </div>
+                </div>
+                <div class="row m-2">
+                    <div class="col">
+                        <div class="input-group">
+                            <label for="" class="input-group-text">Date Fin</label>
+                            <input type="date" formControlName="Date_Fin" name="" class="form-control" id="">
+                        </div>
+                    </div>
+                </div>
+                <div class="row m-2">
+                    <div class="col">
+                        <button class="btn btn-dark">
+                            <i class="bi bi-funnel-fill"></i>
+                            Filtrer</button>
+                    </div>
+                </div>
+            </form>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card text-center">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col">
+                            <h1>Planification du personnel</h1>
+                        </div>
+                        <div class="col"></div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <table class="table">
+                        <thead class="table-dark">
+                            <tr >
+                                <td>Département</td>
+                                <td>Matricule</td>
+                                <td>Prénom & Nom</td>
+                                <td>Fonction</td>
+                                <td>Lundi <br>
+                                    {{Date_Employeur[0]}}
+                                </td>
+                                <td>Mardi
+                                    <br>
+                                    {{Date_Employeur[1]}}
+                                </td>
+                                <td>Mercredi
+                                    <br>
+                                    {{Date_Employeur[2]}}
+                                </td>
+                                <td>Jeudi
+                                    <br>
+                                    {{Date_Employeur[3]}}
+                                </td>
+                                <td>Vendredi
+                                    <br>
+                                    {{Date_Employeur[4]}}
+                                </td>
+                                <td>Samedi
+                                    <br>
+                                    {{Date_Employeur[5]}}
+                                </td>
+                                <td>Dimanche
+                                    <br>
+                                    {{Date_Employeur[6]}}
+                                </td>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                        <hr>
+                        <tfoot>
+                            <tr>
+                                <td>
+                                    <button class="btn btn-danger">
+                                        <i class="bi bi-filetype-pdf"></i>
+                                        Imprimer</button>
+                                </td>
+                                <td>
+                                    <button class="btn btn-success">
+                                        <i class="bi bi-file-earmark-spreadsheet-fill"></i>
+                                        Excel</button>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                   
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row m-2">
+        
+    </div>
+
+
+
+</div>

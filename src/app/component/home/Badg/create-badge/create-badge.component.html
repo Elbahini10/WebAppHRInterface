@@ -1,0 +1,192 @@
+<div>
+    <div class="row m-2">
+        <div class="col">
+            <h1 class="text">Badge Personnel</h1>
+        </div>
+    </div>
+    <hr>
+    <div class="row m-2">
+        <form [formGroup]="FormsBadgs" (change)="change_by_generate_employe()">
+            <div class="col-3">
+                <div class="card">
+                    <div class="row m-2">
+                        <div class="col">
+                            <div class="input-group">
+                                <label for="" class="input-group-text">Changer : </label>
+                                <select required="true" formControlName="Changer" (change)="change_by_generate_employe()"
+                                    class="form-select" id="">
+                                    <option value="EM" selected>Employé</option>
+                                    <option value="GN">Generate</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="row m-2" *ngIf="this.FormsBadgs.value.Changer">
+        <form [formGroup]="FormsBadgs" (change)="find_employer_by_forms_search()">
+            <div class="col-12" #Filtre>
+                <div class="card">
+                    <div class="row m-2">
+                        <div class="col">
+                            <div class="input-group">
+                                <label for="" class="input-group-text">Département : </label>
+                                <select required="true" formControlName="Mc" (change)="find_Services()"
+                                    class="form-select" id="">
+                                    <option *ngFor="let dep of Department" [value]="dep"> {{dep}} </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="input-group">
+                                <label for="" class="input-group-text">Service : </label>
+                                <select required="true" formControlName="Mc2"
+                                    (change)="find_employeur_by_Employer()" class="form-select" id="">
+                                    <option *ngFor="let serv of Services" [value]="serv"> {{serv}} </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="row m-2" *ngIf="this.FormsBadgs.value.Changer">
+        <div class="col-4" #Generate>
+            <form [formGroup]="FormsBadgs" (submit)="find_employeur_by_FullName()">
+                <div class="card FormsBadgs">
+                    <div class="row m-2">
+                        <div class="col">
+                            <div class="input-group">
+                                <label for="" class="input-group-text">Prénom & Nom </label>
+                                <input type="text" formControlName="Fullname"
+                                    placeholder="Firstname & Lastname" name="" class="form-control" id="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row m-2">
+                        <div class="col">
+                            <div class="input-group">
+                                <label for="" class="input-group-text">Fonction </label>
+                                <input type="text" formControlName="function"
+                                    placeholder="Function" name="" class="form-control" id="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row m-2">
+                        <div class="col">
+                            <div class="input-group">
+                                <label for="" class="input-group-text">Nombre de langues</label>
+                                <form [formGroup]="FormsBadgs">
+                                    <select formControlName="NB" (change)="Fun_NB_Pays()" class="form-select">
+                                        <option *ngFor="let i of range()" [value]="i">{{i}}</option>
+                                    </select>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row m-2" *ngFor="let inp of range2()">
+                        <div class="col">
+                            <div class="input-group">
+                                <label for="" class="input-group-text">Langues </label>
+                                <div></div>
+                                <select [formControlName]="'pays_' + inp" class="form-select" id="">
+                                    <option value="{{ country.name.common }}" *ngFor="let country of countries">{{
+                                        country.name.common }}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row m-2">
+                        <div class="col">
+                            <button class="btn btn-primary">Submit</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col">
+            <div class="card FormsBadgs">
+                <div class="row m-3">
+                    <div class="col-4 p-3">
+                        <div class="card" [ngClass]="pdfOptions.pageFormat === 'A4' ? 'a4' : 'a3'">
+                            <!-- Generate -->
+                            <table #pdfTable class="m-3" id="idFlags">
+                                <thead>
+                                    <nav class="nav">
+                                        <ul>
+                                            <li *ngFor="let flagInfo of flagInfoArray">
+                                                <div >
+                                                    <img *ngIf="flagInfo.flagUrl" [src]="flagInfo.flagUrl"
+                                                        alt="{{flagInfo.country}}">
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </nav>
+                                    <tr>
+                                        <td>
+                                            <h4 class="h4"> {{this.FormsBadgs.value.Fullname}} </h4>
+                                        </td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="TbodyTr">
+                                        <td>
+                                            <p class="p"> {{this.FormsBadgs.value.function}} </p>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <!-- Employer -->
+                            <table #pdfTable class="m-3" id="idFlags" *ngIf="employeur">
+                                <thead>
+                                    <nav class="nav">
+                                        <ul *ngFor="let flagInfo of flagInfoArray">
+                                            <li  *ngIf="flagInfo.flagUrl">
+                                                <div >
+                                                    <img [src]="flagInfo.flagUrl"
+                                                        alt="{{flagInfo.country}}">
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </nav>
+                                    <tr>
+                                        <td *ngFor="let empl of employeur">
+                                            <h4 class="h4"> {{empl.firstname}} {{empl.lastname}} </h4>
+                                        </td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="TbodyTr">
+                                        <td *ngFor="let empl of employeur">
+                                            <p class="p"> {{empl.fonction}} </p>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="ImgQrCode" *ngFor="let empl of Date_Employeur">
+                                <qrcode [qrdata]="generateUniqueQrCode(empl.id)"></qrcode>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <button class="btn btn-danger" (click)="Generate_Flags_img()">
+                                <i class="bi bi-printer-fill"></i>
+                                Imprimer
+                            </button>
+                        </div>
+                    </div>
+                    <br>
+                </div>
+
+            </div>
+        </div>
+
+</div>
+
+
+<!-- <ngx-extended-pdf-viewer [src]="pdfUrl"></ngx-extended-pdf-viewer> -->

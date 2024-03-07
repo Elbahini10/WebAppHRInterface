@@ -1,0 +1,126 @@
+<div class="BackGround">
+    <div class="spinner-border text-primary spinner" *ngIf="spinner" role="status">
+        <span class="visually-hidden">Loading...</span>
+    </div>
+    <div class="div">
+        <div class="card Cards">
+            <div class="card-header">
+                <div class="row" *ngFor="let empl of employeur | keyvalue">
+                    <div class="col">
+                        <ng-container *ngIf="empl.key === 'registrationnumber'">
+                            <h1 class="m-3">Employé: {{ empl.value }} </h1>
+                        </ng-container>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div id="DataInfosEmployeur" class="m-3">
+                    <div class="row m-2">
+                        <div class="col">
+                            <h1>Information Personnels</h1>
+                            <hr>
+                        </div>
+                        <div class="col-2">
+                            <div class="card cardImgProfile">
+                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTWSoE6grXCFSoL2aZJoiU5iwtGhI9iOSX2_iWwT-BoG4zwr8aWE2CdRtAqCQM0Xm_qWbs&usqp=CAU"
+                                    alt="logo">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row  InformationPersonnels">
+                        <div class="col">
+                            <div class="row">
+                                <div class="col-12" *ngFor="let empl of employeur | keyvalue">
+                                    <h4 *ngIf="empl.key === 'registrationnumber'"> <span>Matricule</span> :
+                                        {{empl.value}} </h4>
+                                </div>
+                                <div class="col-12" *ngFor="let empl of employeur | keyvalue">
+                                    <h4 *ngIf="empl.key === 'firstname'"><span>Prénom</span> : {{empl.value}} </h4>
+                                </div>
+                                <div class="col-12" *ngFor="let empl of employeur | keyvalue">
+                                    <h4 *ngIf="empl.key === 'lastname'"><span>Nom</span> : {{empl.value}} </h4>
+                                </div>
+                                <div class="col-12" *ngFor="let empl of employeur | keyvalue">
+                                    <h4 *ngIf="empl.key === 'cin'"><span>CIN</span> : {{empl.value}} </h4>
+                                </div>
+                                <div class="col-12" *ngFor="let empl of employeur | keyvalue">
+                                    <h4 *ngIf="empl.key === 'datebirth'"><span>Date Naissance</span> : {{empl.value}}
+                                    </h4>
+                                </div>
+                                <div class="col-12" *ngFor="let empl of employeur | keyvalue">
+                                    <h4 *ngIf="empl.key === 'place_births'"><span>Lieu de Naissance</span> : {{empl.value}}</h4>
+                                </div>
+                                <div class="col-12" *ngFor="let empl of employeur | keyvalue">
+                                    <h4 *ngIf="empl.key === 'contry'"><span>Pays</span> : {{empl.value}} </h4>
+                                </div>
+                                <div class="col-12" *ngFor="let empl of employeur | keyvalue">
+                                    <h4 *ngIf="empl.key === 'city'"><span>Ville</span> : {{empl.value}} </h4>
+                                </div>
+                                <div class="col-12" *ngFor="let empl of employeur | keyvalue">
+                                    <h4 *ngIf="empl.key === 'adress'"><span>Adresse</span> :  {{empl.value}} </h4>
+                                </div>
+                                <div class="col-12" *ngFor="let empl of employeur | keyvalue">
+                                    <h4 *ngIf="empl.key === 'phone'"><span>Téléphone</span> :  {{empl.value}} </h4>
+                                </div>
+                                <div class="col-12" *ngFor="let empl of employeur | keyvalue">
+                                    <h4 *ngIf="empl.key === 'family_situation'"><span>Situation Familia</span> : {{empl.value}} </h4>
+                                </div>
+                                <div class="col-12" *ngFor="let empl of employeur | keyvalue">
+                                    <h4 *ngIf="empl.key === 'number_children'"><span>Nombre d'enfant</span> : {{empl.value}} </h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <h1>Information Professionnelle </h1>
+                        <hr>
+                    </div>
+                    <div class="col">
+                        <div class="row">
+                            <div class="col-12" *ngFor="let empl of employeur | keyvalue">
+                                <h4 *ngIf="empl.key === 'department'"><span>Département</span> : {{empl.value}} </h4>
+                            </div>
+                            <div class="col-12" *ngFor="let empl of employeur | keyvalue">
+                                <h4 *ngIf="empl.key === 'fonction'"> <span>Poste</span> : {{empl.value}} </h4>
+                            </div>
+                            <div class="col-12" *ngFor="let empl of employeur | keyvalue">
+                                <h4 *ngIf="empl.key === 'etat'"> <span>Type de Contrat</span> : {{empl.value}} </h4>
+                            </div>
+                            <div class="col-12" *ngFor="let empl of employeur | keyvalue">
+                                <h4 *ngIf="empl.key === 'datestartwork'"> <span>Date Travail</span> : {{empl.value}}
+                                </h4>
+                            </div>
+                            <div class="col-12" *ngFor="let empl of employeur | keyvalue">
+                                <h4 *ngIf="empl.key === 'timeofwork'"> <span>Durée du contrat initial</span> :
+                                    {{empl.value}} </h4>
+                            </div>
+                            <div class="col-12" *ngFor="let empl of employeur | keyvalue">
+                                <h4 *ngIf="empl.key === 'salary'"> <span>SALAIRE NET</span> : {{empl.value}}
+                                    <span>MAD</span></h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="card-footer">
+                <div class="row">
+                    <div class="col BtnFunction">
+                        <span class="btn btn-danger" (click)="print_info_employeur()">
+                            <i class="bi bi-file-earmark-pdf"></i>
+                            Imprimer</span>
+                        <span (click)="Close_Profile_Employeur()" class="btn btn-warning">
+                            <i class="bi bi-x-circle"></i>
+                            Annuler</span>
+                    </div>
+                    <div class="col">
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

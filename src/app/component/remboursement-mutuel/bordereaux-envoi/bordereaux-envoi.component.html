@@ -1,0 +1,214 @@
+<div>
+  <div class="row m-2">
+      <div class="col">
+          <h1 class="text">Bordereaux d'envoi</h1>
+      </div>
+  </div>
+  <hr>
+  <div class="row m-2">
+      <div class="col" *ngIf="MsgError">
+          <div class="alert alert-danger" *ngIf="MsgError">
+              <p> {{MsgError}} </p>
+          </div>
+      </div>
+      <div class="col" *ngIf="MsgValid">
+          <div class="alert alert-success" *ngIf="MsgValid">
+              <p> {{MsgValid}} </p>
+          </div>
+      </div>
+  </div>
+
+  <div class="BackGround" *ngIf="BtnPageAdd">
+    <div class="div div2">
+        <div class="row m-2">
+            <div class="card p-3">
+                <!-- <div class="row ">
+                    <div class="col" *ngIf="MsgError2">
+                        <div class="alert alert-danger" *ngIf="MsgError2">
+                            <p> {{MsgError2}} </p>
+                        </div>
+                    </div>
+                </div> -->
+                <form [formGroup]="formsRemboursement" (submit)="Func_Add_Remboursement()">
+                    <div class="col">
+                        <div class="row m-2">
+                            <div class="col">
+                                <div class="input-group">
+                                    <label for="" class="input-group-text">Département : </label>
+                                    <select required="true" formControlName="Mc" (change)="find_Services()"
+                                        class="form-select" id="">
+                                        <option *ngFor="let dep of Department" [value]="dep"> {{dep}} </option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row m-2">
+                            <div class="col">
+                                <div class="input-group">
+                                    <label for="" class="input-group-text">Service : </label>
+                                    <select required="true" formControlName="Mc2"
+                                        (change)="find_employeur_by_fonction_departement()" class="form-select"
+                                        id="">
+                                        <option *ngFor="let serv of Services" [value]="serv"> {{serv}} </option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row m-2">
+                            <div class="col">
+                                <div class="input-group">
+                                    <label for="" class="input-group-text">Employeur : </label>
+                                    <select required="true" formControlName="Mc3" class="form-select" id="">
+                                        <option *ngFor="let empl of employeur" [value]="empl.id"> {{empl.firstname}}
+                                            {{empl.lastname}} </option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row m-2">
+                            <div class="col">
+                                <div class="input-group">
+                                    <label for="" class="input-group-text">Date Soin : </label>
+                                    <input type="date" formControlName="date_SOIN" class="form-control" id="">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row m-2">
+                            <div class="col">
+                                <div class="input-group">
+                                    <label for="" class="input-group-text">Mois : </label>
+                                    <select formControlName="Months" class="form-select" id="">
+                                        <option value="JANVIER">JANVIER</option>
+                                        <option value="FÉVRIER">FÉVRIER</option>
+                                        <option value="MARS">MARS</option>
+                                        <option value="AVRIL">AVRIL</option>
+                                        <option value="MAI">MAI</option>
+                                        <option value="JUIN">JUIN</option>
+                                        <option value="JUILLET">JUILLET</option>
+                                        <option value="AOÛT">AOÛT</option>
+                                        <option value="SEPTEMBRE">SEPTEMBRE</option>
+                                        <option value="OCTOBRE">OCTOBRE</option>
+                                        <option value="NOVEMBRE">NOVEMBRE</option>
+                                        <option value="DÉCEMBRE">DÉCEMBRE</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row m-2">
+                            <div class="col">
+                                <div class="input-group">
+                                    <label for="" class="input-group-text">Bénéficiaire : </label>
+                                    <input type="text" formControlName="beneficiaire" class="form-control" id="">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row m-2">
+                            <div class="col">
+                                <div class="input-group">
+                                    <label for="" class="input-group-text">Déstination : </label>
+                                    <select formControlName="DestinationTypes" class="form-select" id="">
+                                        <option *ngFor="let des of Destination" [value]="des"> {{des}} </option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row m-2">
+                            <div class="col">
+                                <div class="input-group">
+                                    <label for="" class="input-group-text">Montent 1 : </label>
+                                    <input type="number" formControlName="montent1" class="form-control" id="">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row m-2">
+                            <div class="col">
+                                <div class="input-group">
+                                    <label for="" class="input-group-text">Montent 2 : </label>
+                                    <input type="number" formControlName="montent2" class="form-control" id="">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row m-2">
+                            <div class="col">
+                                <div class="input-group">
+                                    <div class="form-floating">
+                                        <textarea class="form-control" formControlName="obs"
+                                            placeholder="Leave a comment here" id="floatingTextarea2"
+                                            style="height: 100px"></textarea>
+                                        <label for="floatingTextarea2">Obsérvation : </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row m-2">
+                            <div class="col ">
+                                <button class="btn btn-primary">
+                                    <i class="bi bi-floppy"></i>
+                                    Submit</button>
+                                <span class="btn btn-warning ms-2" (click)="Func_Close_Page_add()" title="Férmer">
+                                    <i class="bi bi-x-circle"></i>
+                                    Annuler
+                                </span>
+                            </div>
+
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="row m-2">
+  <div class="col">
+      <button class="btn btn-success" (click)="Func_Open_Page_add()">
+          <i class="bi bi-plus-circle"></i>
+          Nouveaux
+      </button>
+  </div>
+</div>
+  <!-- Filtre Employeur  -->
+
+  <div class="row m-2">
+      <div class="col text-center">
+          <div class="card">
+              <div class="row m-2">
+                  <div class="col">
+                      <h1>Bordereaux d'envoi {{date.getFullYear()}} </h1>
+                  </div>
+              </div>
+              <table class="table">
+                  <thead class="table-dark">
+                      <tr>
+                          <th>N</th>
+                          <th>B E N</th>
+                          <th>DÉSTINATION </th>
+                          <th>Nom l'assuré</th>
+                          <th>Nom Malade</th>
+                          <th>Date</th>
+                          <th>Montant Réglé</th>
+                          <th>Observation</th>
+                          <th>Rembourser</th>
+                          <th>Facture CIM</th>
+                          <th>Montant Rembourser</th>
+                      </tr>
+                  </thead>
+
+
+              </table>
+
+              <div class="card-footer text-start">
+                  <div class="row">
+                      <div class="col">
+                          <button  class="btn btn-danger" >
+                              <i class="bi bi-file-earmark-pdf"></i>
+                              Imprimer</button>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+
+</div>

@@ -1,0 +1,83 @@
+<div class="BackGround">
+    <div class="div">
+       
+        <!-- Add Recuperation  -->
+        <div class="card m-2" >
+            
+            <div class="card-header">
+                <h1>Prenez Journée pour Récupérer</h1>
+            </div>
+            <div class="card-body">
+                <div class="row m-2" *ngIf="MsgError">
+                    <div class="col">
+                        <div class="alert alert-danger">
+                            <p> {{MsgError}} </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <form [formGroup]="FormsAdd" (submit)="Add_Conger()">
+                        <div class="row p-1">
+                            <div class="col">
+                                <div class="input-group">
+                                    <label for="" class="input-group-text">Matricule : </label>
+                                    <input type="text" name="" [value]="data.registrationnumber" readonly class="form-control" id="">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="input-group">
+                                    <label for="" class="input-group-text">Prénom & Nom: </label>
+                                    <input type="text" name="" [value]="data.firstname +' '+data.lastname" readonly class="form-control" id="">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row p-1">
+                            <div class="col">
+                                <div class="input-group">
+                                    <label for="" class="input-group-text">Département : </label>
+                                    <input type="text" name="" [value]="data.department" readonly class="form-control" id="">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="col">
+                                    <div class="input-group">
+                                        <label for="" class="input-group-text">Fonction : </label>
+                                        <input type="text" name="" [value]="data.fonction" readonly class="form-control" id="">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row p-1">
+
+
+                            <div class="col">
+                                <div class="input-group">
+                                    <label for="" class="input-group-text">Date Début : </label>
+                                    <input type="date" formControlName="dateDebut" name="" class="form-control" id="">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="input-group">
+                                    <label for="" class="input-group-text">Date Fin : </label>
+                                    <input type="date" formControlName="dateFin" name="" class="form-control" id="">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col"><br>
+                                <button class="btn btn-success">Submit</button>
+                                <span class="btn btn-warning BtnCancel" (click)="Fun_Cancel_Page()" >
+                                    <i class="bi bi-x-circle"></i>
+                                    Annuler
+                                </span>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- Add Conge -->
+
+
+    </div>
+</div>

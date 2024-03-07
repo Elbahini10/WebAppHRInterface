@@ -1,0 +1,300 @@
+<div class="BackGround" *ngIf="divSpinner">
+    <div class="spinner-border spinner" role="status">
+        <span class="visually-hidden">Loading...</span>
+    </div>
+</div>
+<div>
+    <div class="row m-2">
+        <div class="col">
+            <h1 class="text">Nouvel Employé</h1>
+        </div>
+    </div>
+    <hr>
+    <form [formGroup]="forms_employeur" (submit)="on_submit_forms_employeur()">
+
+        <div class="row m-2" *ngIf="MsgError">
+            <div class="col">
+                <div class="alert alert-danger">
+                    <p> {{MsgError}} </p>
+                </div>
+            </div>
+        </div>
+        <div class="row m-2" *ngIf="MsgError3">
+            <div class="col">
+                <div class="alert alert-danger">
+                    <p> {{MsgError3}} </p>
+                </div>
+            </div>
+        </div>
+        <div class="row m-2" *ngIf="MsgValide">
+            <div class="col">
+                <div class="alert alert-success">
+                    <h4> {{MsgValide}} </h4>
+                </div>
+            </div>
+        </div>
+
+        <div class="row m-2">
+            <div class="row">
+                <div class="col">
+                    <h4>Renseignements personnels</h4>
+                </div>
+            </div>
+            <hr>
+            <div class="col">
+                <form [formGroup]="forms_employeur" (change)="check_mat_if_existe()">
+                    <label for="">* Matricule : </label>
+                    <input [value]="" class="form-control" placeholder="Matricule" formControlName="mat" id="">
+                    <span class="text-danger MSG_ERR" *ngIf="MsgError2">{{MsgError2}} </span>
+                </form>
+            </div>
+            <div class="col">
+                <label for="">* Prénom : </label>
+                <input type="text" class="form-control" placeholder="Firstname" formControlName="firstname" id="">
+            </div>
+            <div class="col">
+                <label for="">* Nom : </label>
+                <input type="text" class="form-control" placeholder="Lastname" formControlName="lastname" id="">
+            </div>
+            <div class="col">
+                <label for="">* Date Naissance : </label>
+                <input type="date" class="form-control" placeholder="Date Of Birth" formControlName="datebirth" id="">
+            </div>
+            <div class="col">
+                <label for="">* Lieu Naissance : </label>
+                <input type="text" class="form-control" placeholder="Place Of Birth" formControlName="placeBirths"
+                    id="">
+            </div>
+            <div class="col">
+                <form [formGroup]="forms_employeur" (change)="check_Cin_if_existe()">
+                    <label for="">* CIN : </label>
+                    <input type="text" class="form-control" placeholder="ID" formControlName="cin" id="">
+                    <span class="text-danger MSG_ERR" *ngIf="MsgError3"> {{MsgError3}} </span>
+                </form>
+            </div>
+            <div class="col">
+                <label for="">* Adresse : </label>
+                <input type="text" class="form-control" placeholder="Adress" formControlName="adress" id="">
+            </div>
+        </div>
+
+        <div class="row m-2">
+            <div class="col">
+                <label for="">Image : </label>
+                <input type="file" accept=".png,.jpg" multiple #selectFile (change)="onFileSelected($event)" class="form-control" placeholder="Image" formControlName="img" id="">
+                <span class="spanURL" data-bs-toggle="modal" data-bs-target="#exampleModal1">
+                  Voir Image
+                </span>
+              </div>
+            <div class="col">
+                <label for="">* Situation Familiale : </label>
+                <select formControlName="familySituation" class="form-select">
+                    <option value="celibataire" (click)="Disabel_Enfant()">Célibataire</option>
+                    <option value="marie" (click)="Enable_Enfant()">Marié(e)</option>
+                    <option value="divorce" (click)="Enable_Enfant()">Divorcé(e)</option>
+                    <option value="veuf" (click)="Enable_Enfant()">Veuf/Veuve</option>
+                </select>
+            </div>
+            <div class="col" *ngIf="Enfant">
+                <label for="">Nombre d'enfants : </label>
+                <input type="number" value="" min="0" max="20" formControlName="numberChildren" class="form-control"
+                    placeholder="Number of Children" id="">
+            </div>
+
+
+            <div class="col">
+                <label for="">* RIB : </label>
+                <input type="text" class="form-control" placeholder="RIB" formControlName="rib" id="">
+            </div>
+            <div class="col">
+                <label for="">* Banque : </label>
+                <select id="" formControlName="banque" class="form-select">
+                    <option value="attijariwafa">Attijariwafa Bank</option>
+                    <option value="banque_populaire">Banque Populaire du Maroc</option>
+                    <option value="bmce">BMCE Bank</option>
+                    <option value="societe_generale">Société Générale Maroc</option>
+                    <option value="credit_agricole">Crédit Agricole du Maroc</option>
+                    <option value="credit_immobilier_hotelier">CIH Bank (Crédit Immobilier et Hôtelier)</option>
+                    <option value="bmci">BMCI (Banque Marocaine pour le Commerce et l'Industrie)</option>
+                </select>
+            </div>
+        </div>
+        <div class="row m-2">
+            <div class="col">
+                <label for="">Fiche Anthropométrique : </label>
+                <input type="file" accept=".png,.jpg" multiple #selectFile (change)="onFileSelectedFicheAnthropometrique($event)" class="form-control" placeholder="Image" formControlName="img" id="">
+                <span class="spanURL" data-bs-toggle="modal" data-bs-target="#exampleModal2">
+                  Voir Fiche Anthropométrique
+                </span>
+              </div>
+            <div class="col">
+                <label for="">Certificats / Diplômes : </label>
+                <input type="file" accept=".png,.jpg" multiple #selectFile (change)="onFileSelectedDiplome($event)" class="form-control" placeholder="Image" formControlName="img" id="">
+                <span class="spanURL" data-bs-toggle="modal" data-bs-target="#exampleModal3">
+                  Voir Certificats / Diplômes
+                </span>
+            </div>
+            <div class="col">
+                <label for="">Pays : </label>
+                <select class="form-select" formControlName="contry" id="">
+                    <option value="{{ country.name.common }}" *ngFor="let country of countries">{{ country.name.common
+                        }}</option>
+                </select>
+            </div>
+            <div class="col">
+                <label for="">* Ville : </label>
+                <input type="text" class="form-control" placeholder="City" formControlName="city" id="">
+            </div>
+            <div class="col">
+                <label for="">* Téléphone : </label>
+                <div class="input-group">
+                    <label for="" class="input-group-text">+212 </label>
+                    <input type="text" class="form-control" placeholder="Phone" formControlName="phone" id="">
+                </div>
+            </div>
+        </div>
+        <div class="row m-2">
+            <div class="row">
+                <div class="col">
+                    <h4>Information Badge</h4>
+                </div>
+            </div>
+            <hr>
+            <div class="row m-2">
+                <div class="col-4">
+                    <div class="input-group">
+                        <label for="" class="input-group-text">Nombre de langues</label>
+                        <form [formGroup]="forms_employeur">
+                            <select formControlName="NB" (change)="Fun_NB_Pays()" class="form-select">
+                                <option *ngFor="let i of range()" [value]="i">{{i}}</option>
+                            </select>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row m-2">
+            <div class="col-3 p-2" *ngFor="let inp of range2()">
+                <div class="input-group">
+                    <label for="" class="input-group-text">Langues </label>
+                    <select class="form-select" [formControlName]="'pays_' + inp" id="">
+                        <option value="{{ country.name.common }}" *ngFor="let country of countries">{{
+                            country.name.common }}</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row m-2">
+            <div class="row">
+                <div class="col">
+                    <h4>Information Professionnelle</h4>
+                </div>
+            </div>
+            <hr>
+            <div class="col">
+                <!-- <label for=""></label> -->
+                <label for="" class="">* Département : </label>
+                <form [formGroup]="forms_employeur" (change)="find_Services()">
+                <div class="input-group">
+                        <select formControlName="department" *ngIf="ChangeToInput==false" class="form-select" id="">
+                            <option *ngFor="let dep of Department" [value]="dep">{{dep}}</option>
+                        </select>
+
+                    <input type="text" *ngIf="ChangeToInput" class="form-control" placeholder="Department"
+                        formControlName="department" id="">
+                    <span *ngIf="ChangeToInput==false" class="btn btn-dark" (click)="Add_New_Catg()">
+                        <i class="bi bi-plus-circle"></i>
+                    </span>
+                    <span *ngIf="ChangeToInput" class="btn btn-dark" (click)="Retrun_Catg()">
+                        <i class="bi bi-arrow-90deg-left"></i>
+                    </span>
+                </div>
+            </form>
+            </div>
+            <div class="col">
+                <label for="">* Fonction : </label>
+                <div class="input-group">
+                    <select formControlName="fonction" class="form-select" *ngIf="ChangeToInputFonction==false" id="">
+                        <option *ngFor="let func of Fonction" [value]="func"> {{func}} </option>
+                    </select>
+                    <input type="text" class="form-control" *ngIf="ChangeToInputFonction" placeholder="Function"
+                        formControlName="fonction" id="">
+                    <span *ngIf="ChangeToInputFonction==false" class="btn btn-dark" (click)="Add_New_Fonction()">
+                        <i class="bi bi-plus-circle"></i>
+                    </span>
+                    <span *ngIf="ChangeToInputFonction" class="btn btn-dark" (click)="Retrun_Fonction()">
+                        <i class="bi bi-arrow-90deg-left"></i>
+                    </span>
+                </div>
+            </div>
+            <div class="col">
+                <label for="">* Date de début : </label>
+                <input type="date" class="form-control" placeholder="Function" formControlName="datestartwork" id="">
+            </div>
+            <div class="col">
+                <label for="">C.V : </label>
+                <input type="file" accept=".png,.jpg" multiple #selectFile (change)="onFileSelectedCV($event)" class="form-control" placeholder="Image" formControlName="img" id="">
+                <span class="spanURL" data-bs-toggle="modal" data-bs-target="#exampleModal4">
+                  Voir Fiche C.V
+                </span>
+            </div>
+            <div class="col">
+                <label for="">* Etat : </label>
+                <div class="input-group">
+                    <select formControlName="etat" *ngIf="ChangeToInputEtat==false" class="form-select" id="">
+                        <option *ngFor="let etat of Etat" [value]="etat">{{etat}}</option>
+                    </select>
+                    <input type="text" *ngIf="ChangeToInputEtat" class="form-control" placeholder="Etat"
+                        formControlName="etat" id="">
+                    <span *ngIf="ChangeToInputEtat==false" class="btn btn-dark" (click)="Add_New_Etat()">
+                        <i class="bi bi-plus-circle"></i>
+                    </span>
+                    <span *ngIf="ChangeToInputEtat" class="btn btn-dark" (click)="Retrun_Etat()">
+                        <i class="bi bi-arrow-90deg-left"></i>
+                    </span>
+                </div>
+            </div>
+            <div class="col">
+                <span style="font-size: 13px;"> <b>CNSS ? </b>
+                    <input type="radio" name="check" (click)="enebal_assurance()" value="oui"> : Oui
+                    <input type="radio" name="check" (click)="disabel_assurance()" checked value="non"> : Non
+                </span>
+                <input type="text" class="form-control" *ngIf="Assurance" placeholder="" formControlName="cnss">
+            </div>
+        </div>
+
+        <div class="row m-2">
+            <div class="col"><br>
+                <button class="btn btn-success">
+                    <i class="bi bi-floppy2"></i>
+                    submit</button>
+            </div>
+        </div>
+    </form>
+          <!-- Modal -->
+      <div  class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <img [src]="url" *ngIf="url"  alt="" style="width: 100%;">
+        </div>
+      </div>
+          <!-- Modal -->
+      <div  class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <img [src]="urlAnthropometrique"   alt="" style="width: 100%;">
+        </div>
+      </div>
+          <!-- Modal -->
+      <div *ngIf="urlDiplomes" class="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <img [src]="urlDiplomes"  *ngIf="urlDiplomes" alt="" style="width: 100%;">
+        </div>
+      </div>
+          <!-- Modal -->
+      <div *ngIf="urlCV" class="modal fade" id="exampleModal4" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <img [src]="urlCV" *ngIf="urlCV"  alt="" style="width: 100%;">
+        </div>
+      </div>
+
+</div>
+<router-outlet></router-outlet>

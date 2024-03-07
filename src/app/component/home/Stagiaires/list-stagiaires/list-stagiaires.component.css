@@ -1,0 +1,40 @@
+span{
+    margin: 5px;
+    cursor: pointer;
+}
+.BtnFunction button{
+    width: 46%;
+    margin: 2px;
+}
+.Search{
+    width: 30%;
+}
+.NewEmploye{
+    position: relative;
+    left: 2%
+}
+
+.tableEmployeur tbody{
+    width: 100%;
+
+}
+
+
+.BtnExcel{
+    position: relative;
+  left: 100%;
+}
+.BackBtn{
+    position: relative;
+    left: 6%;
+    padding: 10px;
+}
+.tr
+{
+    font-size: 13px;
+}
+
+.tdBtn span
+{
+    margin: -2px;
+}

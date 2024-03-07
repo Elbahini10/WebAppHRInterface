@@ -1,0 +1,289 @@
+<div class="div">
+
+
+  <!-- Augmentation Salaire -->
+  <div class="BackGround" *ngIf="BtnPageAdd">
+    <div class="div1 div2">
+        <div class="row m-2">
+            <div class="card p-3">
+                <form [formGroup]="FormsSalaire" (submit)="Func_Add_Augmantation_Salaire()">
+                    <div class="col">
+                        <div class="row m-2">
+                            <div class="col">
+                                <div class="input-group">
+                                  <label for="" class="input-group-text">Département : </label>
+                                  <select required="true" formControlName="Mc" (change)="find_Services()"
+                                      class="form-select" id="">
+                                      <option *ngFor="let dep1 of Department " [value]="dep1"> {{dep1}} </option>
+                                  </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row m-2">
+                            <div class="col">
+                                <div class="input-group">
+                                    <label for="" class="input-group-text">Service : </label>
+                                    <select required="true" formControlName="Mc2"
+                                        (change)="find_employeur_by_fonction_departement()" class="form-select"
+                                        id="">
+                                        <option *ngFor="let serv of Services" [value]="serv"> {{serv}} </option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row m-2">
+                            <div class="col">
+                                <div class="input-group">
+                                    <label for="" class="input-group-text">Employeur : </label>
+                                    <select required="true" formControlName="Mc3" class="form-select" id="">
+                                        <option *ngFor="let empl of employeur" [value]="empl.id"> {{empl.firstname}}
+                                            {{empl.lastname}} </option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row m-2">
+                            <div class="col">
+                                <div class="input-group">
+                                    <label for="" class="input-group-text">Date d'augmentation : </label>
+                                    <input type="date" formControlName="dateAugmentation" class="form-control" id="">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row m-2">
+                            <div class="col">
+                                <div class="input-group">
+                                    <label for="" class="input-group-text">Montant Augmente : </label>
+                                   <input type="number" formControlName="mt_augmentait" class="form-control" min="" max="" placeholder="MAD" name="" id="">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row m-2">
+                            <div class="col">
+                                <div class="input-group">
+                                    <label for="" class="input-group-text">Montant Actuel : </label>
+                                   <input readonly formControlName="" class="form-control"  placeholder="MAD" name="" id="">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row m-2">
+                            <div class="col">
+                                <div class="input-group">
+                                    <div class="form-floating">
+                                        <textarea class="form-control" formControlName="obs"
+                                            placeholder="Leave a comment here" id="floatingTextarea2"
+                                            style="height: 100px"></textarea>
+                                        <label for="floatingTextarea2">Obsérvation : </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row m-2">
+                            <div class="col ">
+                                <button class="btn btn-primary">
+                                    <i class="bi bi-floppy"></i>
+                                    Submit</button>
+                                <span class="btn btn-warning ms-2" (click)="Func_Close_Page_add()" title="Férmer">
+                                    <i class="bi bi-x-circle"></i>
+                                    Annuler
+                                </span>
+                            </div>
+
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+    <!-- Ajouter Salaire  -->
+    <div class="BackGround" *ngIf="BtnPageAdd2">
+      <div class="div1 div2">
+          <div class="row m-2">
+              <div class="card p-3">
+                  <form [formGroup]="FormsSalaire" (submit)="Func_Add_Salaire()">
+                      <div class="col">
+                          <div class="row m-2">
+                              <div class="col">
+                                  <div class="input-group">
+                                      <label for="" class="input-group-text">Département : </label>
+                                      <select required="true" formControlName="Mc" (change)="find_Services()"
+                                          class="form-select" id="">
+                                          <option *ngFor="let dep of Department" [value]="dep"> {{dep}} </option>
+                                      </select>
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="row m-2">
+                              <div class="col">
+                                  <div class="input-group">
+                                      <label for="" class="input-group-text">Service : </label>
+                                      <select required="true" formControlName="Mc2"
+                                          (change)="find_employeur_by_fonction_departement()" class="form-select"
+                                          id="">
+                                          <option *ngFor="let serv of Services" [value]="serv"> {{serv}} </option>
+                                      </select>
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="row m-2">
+                              <div class="col">
+                                  <div class="input-group">
+                                      <label for="" class="input-group-text">Employeur : </label>
+                                      <select required="true" formControlName="Mc3" class="form-select" id="">
+                                          <option *ngFor="let empl of employeur" [value]="empl.id"> {{empl.firstname}}
+                                              {{empl.lastname}} </option>
+                                      </select>
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="row m-2">
+                              <div class="col">
+                                  <div class="input-group">
+                                      <label for="" class="input-group-text">Montant NET : </label>
+                                     <input type="number" formControlName="salaireNet" class="form-control" min="" max="" placeholder="MAD" name="" id="">
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="row m-2">
+                              <div class="col">
+                                  <div class="input-group">
+                                      <label for="" class="input-group-text">Montant Brut : </label>
+                                     <input type="number" formControlName="salaireBrut" class="form-control" min="" max="" placeholder="MAD" name="" id="">
+                                  </div>
+                              </div>
+                          </div>
+
+                          <div class="row m-2">
+                              <div class="col ">
+                                  <button class="btn btn-primary">
+                                      <i class="bi bi-floppy"></i>
+                                      Submit</button>
+                                  <span class="btn btn-warning ms-2" (click)="Func_Close_Page_add2()" title="Férmer">
+                                      <i class="bi bi-x-circle"></i>
+                                      Annuler
+                                  </span>
+                              </div>
+
+                          </div>
+                      </div>
+                  </form>
+              </div>
+          </div>
+
+      </div>
+  </div>
+
+
+
+  <div class="row m-2">
+      <div class="col">
+          <h1 class="text">Salaire Employé</h1>
+      </div>
+  </div>
+  <hr>
+
+  <div class="row m-2">
+    <div class="col">
+      <button class="btn btn-success" (click)="Func_Open_Page_add2()">
+        <i class="bi bi-plus-circle"></i>
+        Ajouter Salaire</button>
+    </div>
+    <div class="col-2">
+      <button class="btn btn-success" (click)="Func_Open_Page_add()">
+        <i class="bi bi-plus-circle"></i>
+        Augmentation Salaire</button>
+    </div>
+  </div>
+      <!-- Filtre Employeur  -->
+      <div class="row m-2">
+        <form [formGroup]="FormsSalaire" >
+            <div class="col-3">
+                <div class="card">
+                    <div class="row m-2">
+                        <div class="col">
+                            <div class="input-group">
+                                <label for="" class="input-group-text">Département : </label>
+                                <select required="true" formControlName="Mc" (change)="find_Services()"
+                                    class="form-select" id="">
+                                    <option *ngFor="let dep of Department" [value]="dep"> {{dep}} </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+      <!-- Table Employé  -->
+
+    <div class="row m-2">
+      <div class="col"  #Table_Employeur_PDF >
+        <div class="card">
+          <div class="row m-2">
+            <table class="table text-center tableEmployeur">
+                <thead class="table-dark">
+                    <tr>
+                        <td>Matricule</td>
+                        <!-- <td (click)="Order_By_Matricul()"  style="cursor: pointer;">Matricule
+                            <i class="bi bi-caret-up"  (click)="Order_By_Matricul_Asc()" *ngIf="Img_Asc"></i>
+                            <i class="bi bi-caret-down" (click)="Order_By_Matricul_Desc()" *ngIf="Img_Desc"></i>
+                        </td> -->
+                        <td>Prénom</td>
+                        <td>Nom</td>
+                        <td>Départment</td>
+                        <td>Fonction</td>
+                        <td>Etat</td>
+                        <td>Salaire Net</td>
+                        <td>Salaire Brut</td>
+                        <td>Etat</td>
+                        <td>Action</td>
+                    </tr>
+                </thead>
+                <tbody  class="tbody table-light">
+                    <tr *ngFor="let emplSal of SalaireEmployeur">
+                        <td> {{emplSal.id_Employe}} </td>
+                        <td>  </td>
+                        <td>  </td>
+                        <td>  </td>
+                        <td>  </td>
+                        <td>  </td>
+                        <td> {{emplSal.salaireNet}} </td>
+                        <td> {{emplSal.salaireBrut}} </td>
+                        <td>  </td>
+                        <td>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <!-- <div class="row">
+                <div class="col-6">
+                    <nav aria-label="Page navigation example" style="cursor: pointer; float: left;">
+                        <ul class="pagination">
+                            <li class="page-item" [ngClass]="{ 'disabled': this.page === 0 }">
+                                <a class="page-link" (click)="GoToPage(this.page - 1)">Previous</a>
+                            </li>
+                            <ng-container *ngFor="let i of getDisplayedPages()">
+                                <li class="page-item" [ngClass]="{ 'active': i === this.page }">
+                                    <a class="page-link" (click)="GoToPage(i)">{{ i + 1 }}</a>
+                                </li>
+                            </ng-container>
+                            <li class="page-item" [ngClass]="{ 'disabled': this.page === this.totalPage - 1 }">
+                                <a class="page-link" (click)="GoToPage(this.page + 1)">Next</a>
+                            </li>
+                        </ul>
+                    </nav>
+
+                </div>
+
+            </div> -->
+          </div>
+        </div>
+    </div>
+    </div>
+
+
+</div>

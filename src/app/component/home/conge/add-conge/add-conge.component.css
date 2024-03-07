@@ -1,0 +1,33 @@
+.BackGround{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    background-color: #e3e3e352;
+    z-index: 11;
+  }
+
+.div{
+  width: 50%;
+  margin: 0 auto;
+  margin-top: 200px;
+}
+
+.BtnCancel{
+  margin-left: 10px;
+}
+
+
+nav ul {
+  display: flex;
+  list-style: none;
+  gap: 20px;
+}
+
+.bank-logo img {
+  width: 20px; /* Ajustez la largeur selon vos besoins */
+  height: 20px; /* Ajustez la hauteur selon vos besoins */
+  margin-right: 5px; /* Ajoute une marge à droite de l'image pour l'espace */
+}

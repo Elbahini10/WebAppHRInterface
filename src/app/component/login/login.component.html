@@ -1,0 +1,176 @@
+<div class="div">
+    <div class="card"  *ngIf="Btn_Change_Page_Login_Or_SingIn===false">
+        <div class="card-header">
+            <div class="row text-center">
+                <div class="col">
+                    <h1>Authentification</h1>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row" *ngIf="MsgErrors">
+                <div class="col">
+                    <div class="alert alert-danger">
+                        <p> {{ MsgErrors }} </p>
+                        <i (click)="CloseAlertErrors()" class="bi bi-x-lg"></i>
+                    </div>
+                </div>
+            </div>
+
+            <form [formGroup]="Forms_Login_SingIn" (submit)="On_sumbit_Login()">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12">
+                        <div class="input-group">
+                            <label for="" class="input-group-text">Nom d'utilisateur : </label>
+                            <input type="email" formControlName="username" placeholder="Username" class="form-control" id="">
+                            <span class="btn btn-dark">
+                                <i class="bi bi-person-circle"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-md-12 col-sm-12">
+                        <div class="input-group">
+                            <label for="" class="input-group-text">Mot de passe : </label>
+                            <input [type]="inputTypes" formControlName="mdp" placeholder="Password" class="form-control" id="">
+                            <button type="button" class="btn btn-dark">
+                                <i *ngIf="inputTypes==='password'" (click)="ChangeInputToText()" class="bi bi-eye"></i>
+                                <i *ngIf="inputTypes==='text'" (click)="ChangeInputToPassword()" class="bi bi-eye-slash"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-md-12 col-sm-12"><br>
+                        <button class="btn btn-primary">
+                            <i class="bi bi-box-arrow-in-right"></i>
+                            Se connecter
+                        </button>
+                        <br>
+                        <div class="row ">
+                            <div class="col text-center p-3">
+                                <!-- <a class="a float-start" (click)="func_Change_Page_To_SingIn()">Créer un nouveau compte utilisateur</a> -->
+                                <!-- <a class="a float-end" routerLink="/ForgotPassword" >Mot de passe oublié ? </a> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="card-footer">
+            <div class="row text-center">
+                <div class="col">
+                    <p>&copy; Développer By Ismail El Bahini 2023 </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card" *ngIf="Btn_Change_Page_Login_Or_SingIn">
+        <div class="card-header">
+            <div class="row text-center">
+                <div class="col">
+                    <h1>Créer un nouveau compte utilisateur</h1>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row" *ngIf="MsgErrors">
+                <div class="col">
+                    <div class="alert alert-danger">
+                        <p> {{ MsgErrors }} </p>
+                        <i (click)="CloseAlertErrors()" class="bi bi-x-lg"></i>
+                    </div>
+                </div>
+            </div>
+
+            <form [formGroup]="Forms_Login_SingIn" (submit)="On_Submit_For_SingIn()">
+                <div class="row">
+                    <div class="col">
+                       <div class="input-group">
+                            <ng-container ></ng-container>
+                            <label for="" class="input-group-text">Prénom : </label>
+                            <input type="text" formControlName="firstname" placeholder="Firstname" class="form-control" id="">
+                       </div>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col">
+                       <div class="input-group">
+                            <label for="" class="input-group-text">Nom : </label>
+                            <input type="text" formControlName="lastname" placeholder="Lastname" class="form-control" id="">
+                       </div>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col">
+                       <div class="input-group">
+                            <label for="" class="input-group-text">E-mail : </label>
+                            <input type="text" formControlName="username" placeholder="Email" class="form-control" id="">
+                       </div>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col">
+                       <div class="input-group">
+                            <label for="" class="input-group-text">Rôles : </label>
+                            <input type="text" formControlName="Roles" placeholder="Roles" class="form-control" id="">
+                       </div>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col">
+                       <div class="input-group">
+                            <label for="" class="input-group-text">Mot de passe : </label>
+                            <input [type]="inputTypes" formControlName="mdp" placeholder="Password" class="form-control" id="">
+                            <button type="button" class="btn btn-dark">
+                                <i *ngIf="inputTypes==='password'" (click)="ChangeInputToText()" class="bi bi-eye"></i>
+                                <i *ngIf="inputTypes==='text'" (click)="ChangeInputToPassword()" class="bi bi-eye-slash"></i>
+                            </button>
+                       </div>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col">
+                       <div class="input-group">
+                            <label for="" class="input-group-text">Confirmez le mot de passe : </label>
+                            <input [type]="inputTypes" formControlName="C_Mdp" placeholder="Confirm password" class="form-control" id="">
+                            <button type="button" class="btn btn-dark">
+                                <i *ngIf="inputTypes==='password'" (click)="ChangeInputToText()" class="bi bi-eye"></i>
+                                <i *ngIf="inputTypes==='text'" (click)="ChangeInputToPassword()" class="bi bi-eye-slash"></i>
+                            </button>
+                       </div>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col BtnFunction">
+                        <button class="btn btn-primary">
+                            <i class="bi bi-person-plus"></i>
+                            Inscription 
+                        </button>
+                        <br>
+                        <a class="a" (click)="func_Change_Page_To_Login()">Authentification</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="card-footer">
+            <div class="row text-center">
+                <div class="col">
+                    <p>&copy; Développer By Ismail El Bahini 2023 </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<router-outlet></router-outlet>

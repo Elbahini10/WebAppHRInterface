@@ -1,0 +1,106 @@
+<div class="card-header">
+    <div class="offcanvas offcanvas-end text-bg-light" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
+        <div class="offcanvas-header">
+          <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">Web Application RH</h5>
+          <button type="button" class="btn-close btn-close-black" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                <li class="nav-item dropdown">
+                    <a class="dropdown-toggle btn btn-light" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Employeur
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="dropdownId">
+                        <a class="dropdown-item" routerLink="/home/CreateEmploye" >Nouvel Employé</a>
+                        <a class="dropdown-item" routerLink="/home/ListEmploye" >Liste des Employés</a>
+                        <a class="dropdown-item" routerLink="/home/SalaireEmployer" >Salaire</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="dropdown-toggle btn btn-light" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Pointage Employeur
+                    </a>
+                    <!-- <div class="dropdown-menu" aria-labelledby="dropdownId">
+                        <a class="dropdown-item" routerLink="/home/CreateEmploye" >Nouvel Employé</a>
+                        <a class="dropdown-item" routerLink="/home/ListEmploye" >Liste des Employés</a>
+                    </div> -->
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="dropdown-toggle btn btn-light" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Attestation
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="dropdownId">
+                        <a class="dropdown-item" routerLink="AttestationTravail" >Attestation Travail </a>
+                        <a class="dropdown-item" routerLink="AttestationSalaire" >Attestation Salaire </a>
+                        <a class="dropdown-item" routerLink="AttestationStage" >Attestation Stage </a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="dropdown-toggle btn btn-light" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Stagiaires
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="dropdownId">
+                        <a class="dropdown-item" routerLink="CreateStagiaire" >Nouvel Stagiaire</a>
+                        <a class="dropdown-item" routerLink="ListStagiaire" >Liste des Stagiaires</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="dropdown-toggle btn btn-light" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Demandes
+                    </a>
+                    <!-- <div class="dropdown-menu" aria-labelledby="dropdownId">
+                        <a class="dropdown-item" routerLink="CreateEmploye" >Congé/Arrêt Maladie </a>
+                        <a class="dropdown-item" routerLink="ListEmploye" >Augmentation Salaire</a>
+                        <a class="dropdown-item" routerLink="ListEmploye" >Avance Salaire</a>
+                        <a class="dropdown-item" routerLink="ListEmploye" >Prêt</a>
+                    </div> -->
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="dropdown-toggle btn btn-light" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Etat
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="dropdownId">
+                        <a class="dropdown-item" routerLink="conge" >Etat Congé </a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="dropdown-toggle btn btn-light" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Planning
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="dropdownId">
+                        <a class="dropdown-item" routerLink="Planing" >Neveaux Planification </a>
+                        <a class="dropdown-item" routerLink="ListPlaning" >Planification du personnel </a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="dropdown-toggle btn btn-light" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Badge
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="dropdownId">
+                        <a class="dropdown-item" routerLink="CreateBadg" >Créer Badge </a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="dropdown-toggle btn btn-light" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Remboursement Mutuel
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="dropdownId">
+                        <a class="dropdown-item" routerLink="RemboursementMutuel" >Facture Mutuel</a>
+                        <a class="dropdown-item" routerLink="RemboursementMutuel/personnel" >Personnel</a>
+                        <a class="dropdown-item" routerLink="RemboursementMutuel/destination" >Déstination</a>
+                        <a class="dropdown-item" routerLink="RemboursementMutuel/bordereaux-envoi" >Bordreaux d'envoi</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+      </div>
+    <nav class="navbar navbar-light bg-light ">
+        <a class="navbar-brand" routerLink="/home/Page">Web Application RH</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar"
+        aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+    </nav>
+</div>
+<router-outlet></router-outlet>

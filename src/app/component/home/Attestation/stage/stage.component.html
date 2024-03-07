@@ -1,0 +1,126 @@
+<div class="div">
+    <div class="row m-2">
+        <div class="col">
+            <h1 class="text">Attestation de Travail</h1>
+        </div>
+    </div>
+    <hr>
+    <div class="row m-2">
+        <div class="col" *ngIf="MsgError">
+            <div class="alert alert-danger" *ngIf="MsgError">
+                <p> {{MsgError}} </p>
+            </div>
+        </div>
+        <div class="col" *ngIf="MsgValid">
+            <div class="alert alert-success" *ngIf="MsgValid">
+                <p> {{MsgValid}} </p>
+            </div>
+        </div>
+    </div>
+    <!-- Filtre Employeur  -->
+    <div class="row m-2">
+        <form [formGroup]="FormsAttestation" (change)="find_employer_by_forms_search()">
+            <div class="col-12">
+                <div class="card">
+                    <div class="row m-2">
+                        <div class="col">
+                            <div class="input-group">
+                                <label for="" class="input-group-text">Département : </label>
+                                <select required="true" formControlName="Mc" 
+                                    class="form-select" id="">
+                                    <option *ngFor="let dep of Department" [value]="dep"> {{dep}} </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="input-group">
+                                <label for="" class="input-group-text">Stagiaire : </label>
+                                <select required="true" formControlName="Mc3" (change)="get_trainner_by_id()"  class="form-select" id="">
+                                    <option *ngFor="let empl of employeur2" [value]="empl.id_Stagiaires"> {{empl.firstname}}
+                                        {{empl.lastname}} </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="row m-2 text-center">
+        <div class="col p-3">
+            <form [formGroup]="FormsAttestation" (change)="ChangeDateToLieu()">
+                <div class="row" >
+                    <div class="col">
+                        <div class="input-group">
+                            <label for="" class="input-group-text">Date : </label>
+                            <input type="date" formControlName="Mc4" class="form-control" id="">
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="input-group">
+                            <label for="" class="input-group-text">HR : </label>
+                            <input type="text" formControlName="RH" class="form-control" id="">
+                            <select formControlName="ChoseCatPersone" class="form-select" id="">
+                                <option value="Mme .">Mme</option>
+                                <option value="Mr ."> Mr</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="input-group">
+                            <label for="" class="input-group-text">Date Début : </label>
+                            <input type="date" readonly [value]="this.datestart"  class="form-control" id="">
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="input-group">
+                            <label for="" class="input-group-text">Date Fin : </label>
+                            <input type="date" formControlName="dateend" class="form-control" id="">
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-12">
+            <div class="card">
+                <div id="DataInfosEmployeur">
+                    <div class="row">
+                        <div class="col">
+                            <h1>ATTESTATION DE STAGE</h1>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="col" >
+                        <p *ngIf="stagerie">
+                            Nous soussignés, <b>S.I.H.A</b> exploitant l’hôtel <b>Medina Gardens</b>, sis à Djebel Lakhdar <br>
+                             Rue Rmila Marrakech, certifions par la présente que : <br><br>
+                             <span class="h1"> <b> {{stagerie.firstname}} {{stagerie.lastname}} </b></span>
+                            Titulaire de la CIN N° <b> {{stagerie.cin}} </b> à effectuer un stage de formation au service 
+                            <b>{{stagerie.fonction}}</b> <br>
+                            DU {{stagerie.datestart}} Au {{dateend}} <br>
+                            Durant sa période de stage, <span class="h1"> <b> {{stagerie.firstname}} {{stagerie.lastname}} </b></span>
+                             a fait preuve d'une discipline et d'un esprit
+                            ambitieux.<br>
+                            Le présent certificat de stage est délivré à l’intéressé pour servir et valoir ce que de
+                            droit.
+                        </p>
+                    </div><br>
+                    <div class="col offset-8"><br>
+                        <p>
+                            <b>Fait à Marrakech le : </b> {{date}}
+                            <br> <b> Ressources Humaines : </b>
+                            {{ChoseCatPersone}} {{RH}}
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col p-3">
+                <button class="btn btn-danger" (click)="prin_attestation_travail()">
+                    <i class="bi bi-file-earmark-pdf"></i>
+                    Imprimer</button>
+            </div>
+        </div>
+    </div>
+
+
+</div>

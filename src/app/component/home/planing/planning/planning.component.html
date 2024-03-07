@@ -1,0 +1,522 @@
+<div>
+    <div class="row m-2">
+        <div class="col">
+            <h1 class="text">Nouveaux Planification</h1>
+        </div>
+    </div>
+    <hr>
+
+    <div class="row m-2">
+        <div class="col" *ngIf="MsgErros">
+            <div class="alert alert-danger">
+                <p> {{MsgErros}} </p>
+            </div>
+        </div>
+        <div class="col" *ngIf="MsgValids">
+            <div class="alert alert-success">
+                <p> {{MsgValids}} </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row m-3 text-center">
+        <div class="col">
+            <div class="card">
+                <form [formGroup]="FormsPlaning" (click)="Filtre_DAte_Debut_Fin()">
+                    <div class="row m-3">
+                        <div class="col">
+                            <div class="input-group">
+                                <label for="" class="input-group-text">Département</label>
+                                <select formControlName="depart" class="form-select" (change)="get_employeur()" id="">
+                                    <option *ngFor="let dep of Department" [value]="dep"> {{dep}} </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="input-group">
+                                <label for="" class="input-group-text">Date Début</label>
+                                <input type="date" formControlName="Date_Debut" name="" class="form-control" id="">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="input-group">
+                                <label for="" class="input-group-text">Date Fin</label>
+                                <input type="date" formControlName="Date_Fin" name="" class="form-control" id="">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <button class="btn btn-dark">
+                                <i class="bi bi-calendar-date-fill"></i>
+                                Filtrer</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="row m-2">
+        <div class="col">
+            <div class="card text-center">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col">
+                            <p>Hotel Medina Gardens</p>
+                        </div>
+                        <div class="col text-center">
+                            <p>Planification du personnel</p>
+                        </div>
+                        <div class="col"></div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <form [formGroup]="FormsPlaning" (submit)="Func_Add_Planning()">
+                        <table class="table">
+                            <thead class="table-dark">
+                                <tr>
+                                    <td>Matricule</td>
+                                    <td>Prénom & Nom</td>
+                                    <td>Fonction</td>
+                                    <td>Lundi <br>
+                                        {{Date_Employeur[0]}}
+                                    </td>
+                                    <td>Mardi
+                                        <br>
+                                        {{Date_Employeur[1]}}
+                                    </td>
+                                    <td>Mercredi
+                                        <br>
+                                        {{Date_Employeur[2]}}
+                                    </td>
+                                    <td>Jeudi
+                                        <br>
+                                        {{Date_Employeur[3]}}
+                                    </td>
+                                    <td>Vendredi
+                                        <br>
+                                        {{Date_Employeur[4]}}
+                                    </td>
+                                    <td>Samedi
+                                        <br>
+                                        {{Date_Employeur[5]}}
+                                    </td>
+                                    <td>Dimanche
+                                        <br>
+                                        {{Date_Employeur[6]}}
+                                    </td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let empl of employeur">
+                                    <td>{{ empl.registrationnumber}}</td>
+                                    <td> {{ empl.firstname}} {{ empl.lastname}} </td>
+                                    <td>{{ empl.fonction}}</td>
+                                    <td>
+                                        <div class="row card">
+                                            <div class="col">
+                                                <select formControlName="Lundi_First" form class="form-select"
+                                                    name="heureDebut">
+                                                    <option value="08:00">08:00</option>
+                                                    <option value="09:00">09:00</option>
+                                                    <option value="10:00">10:00</option>
+                                                    <option value="11:00">11:00</option>
+                                                    <option value="12:00">12:00</option>
+                                                    <option value="13:00">13:00</option>
+                                                    <option value="14:00">14:00</option>
+                                                    <option value="15:00">15:00</option>
+                                                    <option value="16:00">16:00</option>
+                                                    <option value="17:00">17:00</option>
+                                                    <option value="18:00">18:00</option>
+                                                    <option value="19:00">19:00</option>
+                                                    <option value="20:00">20:00</option>
+                                                    <option value="21:00">21:00</option>
+                                                    <option value="22:00">22:00</option>
+                                                    <option value="23:00">23:00</option>
+                                                    <option value="00:00">00:00</option>
+                                                    <option value="OFF">OFF</option>
+                                                    <option value="RC">CA</option>
+                                                    <option value="RC">RC</option>
+
+                                                </select>
+                                            </div>
+                                            <div class="col">
+                                                <select formControlName="Lundi_Last" form class="form-select"
+                                                    name="heureDebut">
+                                                    <option value="08:00">08:00</option>
+                                                    <option value="09:00">09:00</option>
+                                                    <option value="10:00">10:00</option>
+                                                    <option value="11:00">11:00</option>
+                                                    <option value="12:00">12:00</option>
+                                                    <option value="13:00">13:00</option>
+                                                    <option value="14:00">14:00</option>
+                                                    <option value="15:00">15:00</option>
+                                                    <option value="16:00">16:00</option>
+                                                    <option value="17:00">17:00</option>
+                                                    <option value="18:00">18:00</option>
+                                                    <option value="19:00">19:00</option>
+                                                    <option value="20:00">20:00</option>
+                                                    <option value="21:00">21:00</option>
+                                                    <option value="22:00">22:00</option>
+                                                    <option value="23:00">23:00</option>
+                                                    <option value="00:00">00:00</option>
+                                                    <option value="OFF">OFF</option>
+                                                    <option value="RC">CA</option>
+                                                    <option value="RC">RC</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="row card">
+                                            <div class="col">
+                                                <select formControlName="Mardi_First" form class="form-select"
+                                                    name="heureDebut">
+                                                    <option value="08:00">08:00</option>
+                                                    <option value="09:00">09:00</option>
+                                                    <option value="10:00">10:00</option>
+                                                    <option value="11:00">11:00</option>
+                                                    <option value="12:00">12:00</option>
+                                                    <option value="13:00">13:00</option>
+                                                    <option value="14:00">14:00</option>
+                                                    <option value="15:00">15:00</option>
+                                                    <option value="16:00">16:00</option>
+                                                    <option value="17:00">17:00</option>
+                                                    <option value="18:00">18:00</option>
+                                                    <option value="19:00">19:00</option>
+                                                    <option value="20:00">20:00</option>
+                                                    <option value="21:00">21:00</option>
+                                                    <option value="22:00">22:00</option>
+                                                    <option value="23:00">23:00</option>
+                                                    <option value="00:00">00:00</option>
+                                                    <option value="OFF">OFF</option>
+                                                    <option value="RC">CA</option>
+                                                    <option value="RC">RC</option>
+                                                </select>
+                                            </div>
+                                            <h1></h1>
+                                            <div class="col">
+                                                <select formControlName="Mardi_Last" form class="form-select"
+                                                    name="heureDebut">
+                                                    <option value="08:00">08:00</option>
+                                                    <option value="09:00">09:00</option>
+                                                    <option value="10:00">10:00</option>
+                                                    <option value="11:00">11:00</option>
+                                                    <option value="12:00">12:00</option>
+                                                    <option value="13:00">13:00</option>
+                                                    <option value="14:00">14:00</option>
+                                                    <option value="15:00">15:00</option>
+                                                    <option value="16:00">16:00</option>
+                                                    <option value="17:00">17:00</option>
+                                                    <option value="18:00">18:00</option>
+                                                    <option value="19:00">19:00</option>
+                                                    <option value="20:00">20:00</option>
+                                                    <option value="21:00">21:00</option>
+                                                    <option value="22:00">22:00</option>
+                                                    <option value="23:00">23:00</option>
+                                                    <option value="00:00">00:00</option>
+                                                    <option value="OFF">OFF</option>
+                                                    <option value="RC">CA</option>
+                                                    <option value="RC">RC</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="row card">
+                                            <div class="col">
+                                                <select formControlName="Mercredi_First" form class="form-select"
+                                                    name="heureDebut">
+                                                    <option value="08:00">08:00</option>
+                                                    <option value="09:00">09:00</option>
+                                                    <option value="10:00">10:00</option>
+                                                    <option value="11:00">11:00</option>
+                                                    <option value="12:00">12:00</option>
+                                                    <option value="13:00">13:00</option>
+                                                    <option value="14:00">14:00</option>
+                                                    <option value="15:00">15:00</option>
+                                                    <option value="16:00">16:00</option>
+                                                    <option value="17:00">17:00</option>
+                                                    <option value="18:00">18:00</option>
+                                                    <option value="19:00">19:00</option>
+                                                    <option value="20:00">20:00</option>
+                                                    <option value="21:00">21:00</option>
+                                                    <option value="22:00">22:00</option>
+                                                    <option value="23:00">23:00</option>
+                                                    <option value="00:00">00:00</option>
+                                                    <option value="OFF">OFF</option>
+                                                    <option value="RC">CA</option>
+                                                    <option value="RC">RC</option>
+                                                </select>
+                                            </div>
+                                            <h1></h1>
+                                            <div class="col">
+                                                <select formControlName="Mercredi_Last" form class="form-select"
+                                                    name="heureDebut">
+                                                    <option value="08:00">08:00</option>
+                                                    <option value="09:00">09:00</option>
+                                                    <option value="10:00">10:00</option>
+                                                    <option value="11:00">11:00</option>
+                                                    <option value="12:00">12:00</option>
+                                                    <option value="13:00">13:00</option>
+                                                    <option value="14:00">14:00</option>
+                                                    <option value="15:00">15:00</option>
+                                                    <option value="16:00">16:00</option>
+                                                    <option value="17:00">17:00</option>
+                                                    <option value="18:00">18:00</option>
+                                                    <option value="19:00">19:00</option>
+                                                    <option value="20:00">20:00</option>
+                                                    <option value="21:00">21:00</option>
+                                                    <option value="22:00">22:00</option>
+                                                    <option value="23:00">23:00</option>
+                                                    <option value="00:00">00:00</option>
+                                                    <option value="OFF">OFF</option>
+                                                    <option value="RC">CA</option>
+                                                    <option value="RC">RC</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="row card">
+                                            <div class="col">
+                                                <select formControlName="Jeudi_First" form class="form-select"
+                                                    name="heureDebut">
+                                                    <option value="08:00">08:00</option>
+                                                    <option value="09:00">09:00</option>
+                                                    <option value="10:00">10:00</option>
+                                                    <option value="11:00">11:00</option>
+                                                    <option value="12:00">12:00</option>
+                                                    <option value="13:00">13:00</option>
+                                                    <option value="14:00">14:00</option>
+                                                    <option value="15:00">15:00</option>
+                                                    <option value="16:00">16:00</option>
+                                                    <option value="17:00">17:00</option>
+                                                    <option value="18:00">18:00</option>
+                                                    <option value="19:00">19:00</option>
+                                                    <option value="20:00">20:00</option>
+                                                    <option value="21:00">21:00</option>
+                                                    <option value="22:00">22:00</option>
+                                                    <option value="23:00">23:00</option>
+                                                    <option value="00:00">00:00</option>
+                                                    <option value="OFF">OFF</option>
+                                                    <option value="RC">CA</option>
+                                                    <option value="RC">RC</option>
+                                                </select>
+                                            </div>
+                                            <h1></h1>
+                                            <div class="col">
+                                                <select formControlName="Jeudi_Last" form class="form-select"
+                                                    name="heureDebut">
+                                                    <option value="08:00">08:00</option>
+                                                    <option value="09:00">09:00</option>
+                                                    <option value="10:00">10:00</option>
+                                                    <option value="11:00">11:00</option>
+                                                    <option value="12:00">12:00</option>
+                                                    <option value="13:00">13:00</option>
+                                                    <option value="14:00">14:00</option>
+                                                    <option value="15:00">15:00</option>
+                                                    <option value="16:00">16:00</option>
+                                                    <option value="17:00">17:00</option>
+                                                    <option value="18:00">18:00</option>
+                                                    <option value="19:00">19:00</option>
+                                                    <option value="20:00">20:00</option>
+                                                    <option value="21:00">21:00</option>
+                                                    <option value="22:00">22:00</option>
+                                                    <option value="23:00">23:00</option>
+                                                    <option value="00:00">00:00</option>
+                                                    <option value="OFF">OFF</option>
+                                                    <option value="RC">CA</option>
+                                                    <option value="RC">RC</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="row card">
+                                            <div class="col">
+                                                <select formControlName="Vendredi_First" form class="form-select"
+                                                    name="heureDebut">
+                                                    <option value="08:00">08:00</option>
+                                                    <option value="09:00">09:00</option>
+                                                    <option value="10:00">10:00</option>
+                                                    <option value="11:00">11:00</option>
+                                                    <option value="12:00">12:00</option>
+                                                    <option value="13:00">13:00</option>
+                                                    <option value="14:00">14:00</option>
+                                                    <option value="15:00">15:00</option>
+                                                    <option value="16:00">16:00</option>
+                                                    <option value="17:00">17:00</option>
+                                                    <option value="18:00">18:00</option>
+                                                    <option value="19:00">19:00</option>
+                                                    <option value="20:00">20:00</option>
+                                                    <option value="21:00">21:00</option>
+                                                    <option value="22:00">22:00</option>
+                                                    <option value="23:00">23:00</option>
+                                                    <option value="00:00">00:00</option>
+                                                    <option value="OFF">OFF</option>
+                                                    <option value="RC">CA</option>
+                                                    <option value="RC">RC</option>
+                                                </select>
+                                            </div>
+                                            <h1></h1>
+                                            <div class="col">
+                                                <select formControlName="Vendredi_Last" form class="form-select"
+                                                    name="heureDebut">
+                                                    <option value="08:00">08:00</option>
+                                                    <option value="09:00">09:00</option>
+                                                    <option value="10:00">10:00</option>
+                                                    <option value="11:00">11:00</option>
+                                                    <option value="12:00">12:00</option>
+                                                    <option value="13:00">13:00</option>
+                                                    <option value="14:00">14:00</option>
+                                                    <option value="15:00">15:00</option>
+                                                    <option value="16:00">16:00</option>
+                                                    <option value="17:00">17:00</option>
+                                                    <option value="18:00">18:00</option>
+                                                    <option value="19:00">19:00</option>
+                                                    <option value="20:00">20:00</option>
+                                                    <option value="21:00">21:00</option>
+                                                    <option value="22:00">22:00</option>
+                                                    <option value="23:00">23:00</option>
+                                                    <option value="00:00">00:00</option>
+                                                    <option value="OFF">OFF</option>
+                                                    <option value="RC">CA</option>
+                                                    <option value="RC">RC</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="row card">
+                                            <div class="col">
+                                                <select formControlName="Samedi_First" form class="form-select"
+                                                    name="heureDebut">
+                                                    <option value="08:00">08:00</option>
+                                                    <option value="09:00">09:00</option>
+                                                    <option value="10:00">10:00</option>
+                                                    <option value="11:00">11:00</option>
+                                                    <option value="12:00">12:00</option>
+                                                    <option value="13:00">13:00</option>
+                                                    <option value="14:00">14:00</option>
+                                                    <option value="15:00">15:00</option>
+                                                    <option value="16:00">16:00</option>
+                                                    <option value="17:00">17:00</option>
+                                                    <option value="18:00">18:00</option>
+                                                    <option value="19:00">19:00</option>
+                                                    <option value="20:00">20:00</option>
+                                                    <option value="21:00">21:00</option>
+                                                    <option value="22:00">22:00</option>
+                                                    <option value="23:00">23:00</option>
+                                                    <option value="00:00">00:00</option>
+                                                    <option value="OFF">OFF</option>
+                                                    <option value="RC">CA</option>
+                                                    <option value="RC">RC</option>
+                                                </select>
+                                            </div>
+                                            <h1></h1>
+                                            <div class="col">
+                                                <select formControlName="Samedi_Last" form class="form-select"
+                                                    name="heureDebut">
+                                                    <option value="08:00">08:00</option>
+                                                    <option value="09:00">09:00</option>
+                                                    <option value="10:00">10:00</option>
+                                                    <option value="11:00">11:00</option>
+                                                    <option value="12:00">12:00</option>
+                                                    <option value="13:00">13:00</option>
+                                                    <option value="14:00">14:00</option>
+                                                    <option value="15:00">15:00</option>
+                                                    <option value="16:00">16:00</option>
+                                                    <option value="17:00">17:00</option>
+                                                    <option value="18:00">18:00</option>
+                                                    <option value="19:00">19:00</option>
+                                                    <option value="20:00">20:00</option>
+                                                    <option value="21:00">21:00</option>
+                                                    <option value="22:00">22:00</option>
+                                                    <option value="23:00">23:00</option>
+                                                    <option value="00:00">00:00</option>
+                                                    <option value="OFF">OFF</option>
+                                                    <option value="RC">CA</option>
+                                                    <option value="RC">RC</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="row card">
+                                            <div class="col">
+                                                <select formControlName="Dimanche_First" form class="form-select"
+                                                    name="heureDebut">
+                                                    <option value="08:00">08:00</option>
+                                                    <option value="09:00">09:00</option>
+                                                    <option value="10:00">10:00</option>
+                                                    <option value="11:00">11:00</option>
+                                                    <option value="12:00">12:00</option>
+                                                    <option value="13:00">13:00</option>
+                                                    <option value="14:00">14:00</option>
+                                                    <option value="15:00">15:00</option>
+                                                    <option value="16:00">16:00</option>
+                                                    <option value="17:00">17:00</option>
+                                                    <option value="18:00">18:00</option>
+                                                    <option value="19:00">19:00</option>
+                                                    <option value="20:00">20:00</option>
+                                                    <option value="21:00">21:00</option>
+                                                    <option value="22:00">22:00</option>
+                                                    <option value="23:00">23:00</option>
+                                                    <option value="00:00">00:00</option>
+                                                    <option value="OFF">OFF</option>
+                                                    <option value="RC">CA</option>
+                                                    <option value="RC">RC</option>
+                                                </select>
+                                            </div>
+                                            <h1></h1>
+                                            <div class="col">
+                                                <select formControlName="Dimanche_Last" form class="form-select"
+                                                    name="heureDebut">
+                                                    <option value="08:00">08:00</option>
+                                                    <option value="09:00">09:00</option>
+                                                    <option value="10:00">10:00</option>
+                                                    <option value="11:00">11:00</option>
+                                                    <option value="12:00">12:00</option>
+                                                    <option value="13:00">13:00</option>
+                                                    <option value="14:00">14:00</option>
+                                                    <option value="15:00">15:00</option>
+                                                    <option value="16:00">16:00</option>
+                                                    <option value="17:00">17:00</option>
+                                                    <option value="18:00">18:00</option>
+                                                    <option value="19:00">19:00</option>
+                                                    <option value="20:00">20:00</option>
+                                                    <option value="21:00">21:00</option>
+                                                    <option value="22:00">22:00</option>
+                                                    <option value="23:00">23:00</option>
+                                                    <option value="00:00">00:00</option>
+                                                    <option value="OFF">OFF</option>
+                                                    <option value="RC">CA</option>
+                                                    <option value="RC">RC</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <div class="row">
+                                    <div class="col">
+                                        <button class="btn btn-success">
+                                            <i class="bi bi-floppy-fill"></i>
+                                            Enregistrer
+                                        </button>
+                                    </div>
+                                </div>
+                            </tfoot>
+                        </table>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+</div>

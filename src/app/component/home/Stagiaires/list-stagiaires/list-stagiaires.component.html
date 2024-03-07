@@ -1,0 +1,169 @@
+<div>
+    <div class="row m-2">
+        <div class="col-10">
+            <h1 class="text">Liste des Stagiaires</h1>
+        </div>
+        <div class="col BackBtn">
+            <a href="" class="btn btn-dark">
+                <i class="bi bi-skip-backward-fill"></i>
+                Retour</a>
+        </div>
+    </div>
+    <hr>
+
+    <div class="row m-2" *ngIf="MsgError">
+        <div class="col">
+            <div class="alert alert-danger">
+                <p> {{MsgError}} </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row m-2">
+        <div class="col">
+            <form [formGroup]="FormsGroups" (submit)="SearchForstagiaires()">
+                <div class="input-group Search">
+                    <label for="" class="input-group-text">Recherche : </label>
+                    <input type="search" placeholder="Matricule / Cin " formControlName="McSearch" class="form-control"
+                        id="">
+                    <button class="btn btn-primary"><i class="bi bi-search"></i></button>
+                </div>
+            </form>
+        </div>
+        <div class="col-2 ms-2 NewEmploye">
+            <a class="btn btn-success" routerLink="/CreateStagiaire">
+                <i class="bi bi-person-plus"></i>
+                Nouveau Stagiaire</a>
+        </div>
+    </div>
+    <hr>
+    <div class="row m-2">
+
+
+        <div class="col-3">
+            <form >
+                <div class="row">
+                    <div class="col">
+                        <form  [formGroup]="Forms_Stagiaires"  >
+                            <div class="input-group">
+                                <label for="" class="input-group-text">Département : </label>
+                                <select required="true" (change)="find_Services()" formControlName="Mc" 
+                                    class="form-select" id="">
+                                    <option *ngFor="let dep of Department" [value]="dep"> {{dep}} </option>
+                                </select>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col"><br>
+                        <form>
+                            <div class="input-group">
+                                <label for="" class="input-group-text">Service : </label>
+                                <select required="true"class="form-select" id="">
+                                    <option *ngFor="let serv of Services" [value]="serv"> {{serv}} </option>
+                                </select>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col"><br>
+                        <form>
+                            <div class="input-group">
+                                <label for="" class="input-group-text">Ecole / Etablissement : </label>
+                                <select required="true"  class="form-select" id="">
+                                    <option *ngFor="let school of School" [value]="school"> {{school}} </option>
+                                </select>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col BtnFunction"><br>
+                        <button disabled class="btn btn-danger">
+                            <i class="bi bi-file-earmark-pdf"></i>
+                            Imprimer</button>
+                        <button class="btn btn-dark">
+                            <i class="bi bi-funnel"></i>
+                            Filtrer</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-9">
+            <table class="table text-center tableEmployeur">
+                <thead class="table-light thead">
+                    <tr>
+                        <td>
+                            <input type="radio"  name="" id="">
+                        </td>
+                        <td>Prénom</td>
+                        <td>Nom</td>
+                        <td>Cin</td>
+                        <td>Département</td>
+                        <td>Services</td>
+                        <td>Etat</td>
+                        <td>Date début </td>
+                        <td>Etablissement</td>
+                        <td>Action</td>
+                    </tr>
+                </thead>
+                <tbody  class="tbody">
+                    <tr *ngFor="let stage of Stagiaires" >
+                        <td>
+                            <input type="checkbox" id="">
+                        </td>
+                     <td> {{ stage.firstname }} </td>
+                     <td> {{ stage.lastname }} </td>
+                     <td> {{ stage.cin }} </td>
+                     <td> {{ stage.department }} </td>
+                     <td> {{ stage.fonction }} </td>
+                     <td> {{ stage.etat }} </td>
+                     <td> {{ stage.datestartwork }} </td>
+                     <td> {{ stage.school }} </td>
+                     <td >
+                        <span title="Profile" class="text-success"><i
+                                class="bi bi-info-circle"></i></span>
+                        <span title="Modifier" class="text-dark"><i class="bi bi-pencil"></i></span>
+                        <span title="Supprimer" class="text-danger"><i class="bi bi-trash"></i></span>
+                    </td>
+                    </tr>
+                </tbody>
+        
+            </table>
+            <div class="row">
+                <div class="col-6">
+                    <nav aria-label="Page navigation example" style="cursor: pointer; float: left;">
+                        <ul class="pagination">
+                            <li class="page-item" [ngClass]="{ 'disabled': this.page === 0 }">
+                                <a class="page-link" (click)="GoToPage(this.page - 1)">Previous</a>
+                            </li>
+                            <ng-container *ngFor="let i of getDisplayedPages()">
+                                <li class="page-item" [ngClass]="{ 'active': i === this.page }">
+                                    <a class="page-link" (click)="GoToPage(i)">{{ i + 1 }}</a>
+                                </li>
+                            </ng-container>
+                            <li class="page-item" [ngClass]="{ 'disabled': this.page === this.totalPage - 1 }">
+                                <a class="page-link" (click)="GoToPage(this.page + 1)">Next</a>
+                            </li>
+                        </ul>
+                    </nav>
+                    <button class="btn btn-success BtnExcel"  style="float: right;">
+                        <i class="bi bi-file-earmark-excel"></i>
+                        Excel</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+</div>
+
+
+
+<router-outlet></router-outlet>

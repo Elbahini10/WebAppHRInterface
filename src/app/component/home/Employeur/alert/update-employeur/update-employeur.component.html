@@ -1,0 +1,524 @@
+<div class="BackGround">
+  <div class="div">
+    <div class="card">
+      <div class="card-header">
+        <div class="row">
+          <div class="col-10">
+            <h1>Modifier Profile</h1>
+          </div>
+        </div>
+      </div>
+      <form (ngSubmit)="update_employeur()">
+        <div class="card-body">
+          <div class="row m-2">
+            <div class="col">
+              <h4>Renseignements Personnels</h4>
+            </div>
+            <hr />
+            <div class="row">
+              <div class="col">
+                <label for="">* Matricule : </label>
+                <input
+                  name="employe.registrationnumber"
+                  [value]="employe.registrationnumber"
+                  [(ngModel)]="this.employe.registrationnumber"
+                  class="form-control"
+                  placeholder="Matricule"
+                  id=""
+
+                />
+              </div>
+              <div class="col">
+                <label for="">* Prénom : </label>
+                <input
+                  name="employe.firstname"
+                  [value]="employe.firstname"
+                  [(ngModel)]="this.employe.firstname"
+                  type="text"
+                  class="form-control"
+                  placeholder="Firstname"
+                  id=""
+                />
+              </div>
+              <div class="col">
+                <label for="">* Nom : </label>
+                <input
+                  name="employe.lastname"
+                  [value]="employe.lastname"
+                  [(ngModel)]="this.employe.lastname"
+                  type="text"
+                  class="form-control"
+                  placeholder="Lastname"
+                  id=""
+                />
+              </div>
+              <div class="col">
+                <label for="">* Date Naissance : </label>
+                <input
+                  name="employe.datebirth"
+                  [value]="employe.datebirth"
+                  [(ngModel)]="this.employe.datebirth"
+                  type="date"
+                  class="form-control"
+                  placeholder="Date Of Birth"
+                  id=""
+                />
+              </div>
+              <div class="col">
+                <label for="">* Lieu Naissance : </label>
+                <input
+                  [value]="employe.placeBirths"
+                  name="employe.placeBirths"
+                  [(ngModel)]="this.employe.placeBirths"
+                  type="text"
+                  class="form-control"
+                  placeholder="Place Of Birth"
+                  id=""
+                />
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col">
+                <label for="">* CIN : </label>
+                <input
+                  [value]="employe.cin"
+                  name="employe.cin"
+                  [(ngModel)]="this.employe.cin"
+                  type="text"
+                  class="form-control"
+                  placeholder="ID"
+                  id=""
+                />
+              </div>
+              <div class="col">
+                <label for="">* Adresse : </label>
+                <input
+                  name="employe.adress"
+                  [value]="employe.adress"
+                  [(ngModel)]="this.employe.adress"
+                  type="text"
+                  class="form-control"
+                  placeholder="Adress"
+                  id=""
+                />
+              </div>
+              <div class="col" *ngIf="BtnFunChangeSituationFamily2 != false">
+                <label for="">* Situation Familiale : </label>
+                <input
+                  style="pointer-events: none"
+                  type="text"
+                  name="employe.familySituation"
+                  [value]="employe.familySituation"
+                  [(ngModel)]="this.employe.familySituation"
+                  class="form-control"
+                  id=""
+                />
+                <a
+                  type="button"
+                  class="DownlaodImg"
+                  (click)="FunChangeSituationFamily()"
+                  >Modifier Situation Familiale
+                </a>
+              </div>
+              <div class="col" *ngIf="BtnFunChangeSituationFamily">
+                <label for="">* Situation Familiale : </label>
+                <div class="input-group">
+                  <select name="employe.familySituation" [(ngModel)]="this.employe.familySituation" class="form-select">
+                    <option value="celibataire" (click)="Disabel_Enfant()">
+                      Célibataire
+                    </option>
+                    <option value="marie" (click)="Enable_Enfant()">
+                      Marié(e)
+                    </option>
+                    <option value="divorce" (click)="Enable_Enfant()">
+                      Divorcé(e)
+                    </option>
+                    <option value="veuf" (click)="Enable_Enfant()">
+                      Veuf/Veuve
+                    </option>
+                  </select>
+                  <span
+                    class="btn btn-danger"
+                    (click)="FunDesactiveChangeSituationFamily()"
+                  >
+                    <i class="bi bi-x-circle"></i>
+                  </span>
+                </div>
+              </div>
+              <div class="col" *ngIf="Enfant || employe.numberChildren != null">
+                <label for="">Nombre d'enfants : </label>
+                <input
+                name="employe.numberChildren"
+                  [value]="employe.numberChildren"
+                  [(ngModel)]="this.employe.numberChildren"
+                  type="number"
+                  value=""
+                  min="0"
+                  max="20"
+                  class="form-control"
+                  placeholder="Number of Children"
+                  id=""
+                />
+              </div>
+              <div class="col">
+                <label for="">* RIB : </label>
+                <input
+                  type="text"
+                  name="employe.rib"
+                  [value]="employe.rib"
+                  [(ngModel)]="this.employe.rib"
+                  class="form-control"
+                  placeholder="RIB"
+                  id=""
+                />
+              </div>
+              <div class="col" *ngIf="BtnFunBanque2 != false">
+                <label for="">* Banque : </label>
+                <input
+                  type="text"
+                 readonly
+                  [value]="employe.banque"
+                  class="form-control"
+                  placeholder="RIB"
+                  id=""
+                />
+                <a type="button" class="DownlaodImg" (click)="FunChangeBanque()"
+                  >Modifier Banque
+                </a>
+              </div>
+              <div class="col" *ngIf="BtnFunBanque">
+                <label for="">* Banque : </label>
+                <div class="input-group">
+                  <select name="employe.banque" [(ngModel)]="this.employe.banque"  class="form-select">
+                    <option value="attijariwafa">Attijariwafa Bank</option>
+                    <option value="banque_populaire">
+                      Banque Populaire du Maroc
+                    </option>
+                    <option value="bmce">BMCE Bank</option>
+                    <option value="societe_generale">
+                      Société Générale Maroc
+                    </option>
+                    <option value="credit_agricole">
+                      Crédit Agricole du Maroc
+                    </option>
+                    <option value="credit_immobilier_hotelier">
+                      CIH Bank (Crédit Immobilier et Hôtelier)
+                    </option>
+                    <option value="bmci">
+                      BMCI (Banque Marocaine pour le Commerce et l'Industrie)
+                    </option>
+                  </select>
+                  <span class="btn btn-danger" (click)="FunDesactiveBanque()">
+                    <i class="bi bi-x-circle"></i>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <label for="">* Pays : </label>
+                <input
+                  [value]="employe.contry"
+                  name="employe.contry"
+                  [(ngModel)]="this.employe.contry"
+                  type="text"
+                  class="form-control"
+                  placeholder="Country"
+                  id=""
+                />
+              </div>
+              <div class="col">
+                <label for="">* Ville : </label>
+                <input
+                name="employe.city"
+                  [value]="employe.city"
+                  [(ngModel)]="this.employe.city"
+                  type="text"
+                  class="form-control"
+                  placeholder="City"
+                  id=""
+                />
+              </div>
+              <div class="col">
+                <label for="">Image : </label>
+                <input
+                  type="file"
+                  accept=".png,.jpg"
+                  multiple
+                  #selectFile
+                  (change)="onFileSelected($event)"
+                  class="form-control"
+                  placeholder="pectur"
+                  formControlName="img"
+                  id=""
+                />
+                <!-- <a type="button" class="DownlaodImg" (click)="onFileSelected($event)">Télécharger Image </a> -->
+              </div>
+              <div class="col">
+                <label for="">Fiche Anthropométrique : </label>
+                <input
+                  type="file"
+                  accept=".png,.jpg"
+                  class="form-control"
+                  placeholder="pectur"
+                  formControlName="anthropometric"
+                  id=""
+                />
+                <a type="button" class="DownlaodImg" (click)="onSubmit()"
+                  >Télécharger Image
+                </a>
+              </div>
+              <div class="col">
+                <label for="">Certificats / Diplômes : </label>
+                <input
+                  type="file"
+                  accept=".png,.jpg"
+                  class="form-control"
+                  placeholder="pectur"
+                  formControlName="certificates"
+                  id=""
+                />
+                <a type="button" class="DownlaodImg" (click)="onSubmit()"
+                  >Télécharger Image
+                </a>
+              </div>
+
+              <div class="col">
+
+                <label for="">* Téléphone : </label>
+                <input
+                 name="employe.phone"
+                  [value]="employe.phone"
+                  [(ngModel)]="this.employe.phone"
+                  type="text"
+                  class="form-control"
+                  placeholder="Phone"
+                  id=""
+                />
+              </div>
+            </div>
+            <div class="col">
+              <h4>Information Professionnelle</h4>
+            </div>
+            <hr />
+            <div class="row">
+              <div class="col" *ngIf="BtnFunChangeDepartement2 != false">
+                <label for="" class="">Département : </label>
+                <input
+                  style="pointer-events: none"
+                  type="text"
+                  class="form-control"
+                  [value]="employe.department"
+                  id=""
+
+                />
+                <a
+                  type="button"
+                  class="DownlaodImg"
+                  (click)="FunChangeDepartement()"
+                  >Modifier Département</a
+                >
+              </div>
+              <div class="col" *ngIf="BtnFunChangeDepartement">
+                <label for="" class="">Département : </label>
+                <div class="input-group">
+                  <span
+                    class="btn btn-danger"
+                    (click)="FunDesactiveChangeDepartement()"
+                  >
+                    <i class="bi bi-x-circle"></i>
+                  </span>
+                  <select
+                     name="employe.department"
+                     [(ngModel)]="this.employe.department"
+                    *ngIf="ChangeToInput_One"
+                    class="form-select"
+                    id=""
+                  >
+                    <option *ngFor="let dep of Department" [value]="dep">
+                      {{ dep }}
+                    </option>
+                  </select>
+                  <input
+                    type="text"
+                    *ngIf="ChangeToInput_Tow"
+                    class="form-control"
+                    placeholder="Department"
+                    id=""
+                    name="employe.department"
+                    [(ngModel)]="this.employe.department"
+                  />
+                  <span
+                    class="btn btn-dark"
+                    *ngIf="ChangeToInput_One"
+                    (click)="Add_New_Catg()"
+                  >
+                    <i class="bi bi-plus-circle"></i>
+                  </span>
+                  <span
+                    class="btn btn-dark"
+                    *ngIf="ChangeToInput_Tow"
+                    (click)="Retrun_Catg()"
+                  >
+                    <i class="bi bi-arrow-90deg-left"></i>
+                  </span>
+                </div>
+              </div>
+              <div class="col">
+                <label for="">* Emploi : </label>
+                <input
+                name="employe.fonction"
+                [value]="employe.fonction"
+                [(ngModel)]="this.employe.fonction"
+                  type="text"
+                  class="form-control"
+                  placeholder="Function"
+                  id=""
+                />
+              </div>
+              <div class="col">
+                <label for="">* Date de début : </label>
+                <input
+                  type="date"
+                  name="employe.datestartwork"
+                  [value]="employe.datestartwork"
+                  [(ngModel)]="this.employe.datestartwork"
+                  class="form-control"
+                  placeholder="Function"
+                  id=""
+                />
+              </div>
+              <div class="col">
+                <label for="">CV : </label>
+                <input
+                  type="file"
+                  accept=".png,.jpg"
+                  class="form-control"
+                  placeholder="pectur"
+                  id=""
+                />
+                <a type="button" class="DownlaodImg" (click)="onSubmit()"
+                  >Télécharger Image
+                </a>
+              </div>
+              <div class="col" *ngIf="BtnFunChangeEtat2 != false">
+                <label for="">* Etat : </label>
+                <input
+                  type="text"
+                  [value]="employe.etat"
+                  class="form-control"
+                  id=""
+                  readonly
+                />
+                <a type="button" class="DownlaodImg" (click)="FunChangeEtat()"
+                  >Modifier Etat</a
+                >
+              </div>
+              <div class="col" *ngIf="BtnFunChangeEtat">
+                <label for="" class="">Etat : </label>
+                <div class="input-group">
+                  <span
+                    class="btn btn-danger"
+                    (click)="FunDesactiveChangeEtat()"
+                  >
+                    <i class="bi bi-x-circle"></i>
+                  </span>
+                  <select
+                  name="employe.etat"
+                  [(ngModel)]="this.employe.etat"
+                  [value]="employe.etat"
+                    *ngIf="ChangeToInput_One"
+                    class="form-select"
+                    id=""
+                  >
+                    <option *ngFor="let etat of Etat" [value]="etat">
+                      {{ etat }}
+                    </option>
+                  </select>
+                  <input
+                    type="text"
+                    *ngIf="ChangeToInput_Tow"
+                    class="form-control"
+                    placeholder="Etat"
+                    id=""
+                    name="employe.etat"
+                    [value]="employe.etat"
+                    [(ngModel)]="this.employe.etat"
+                  />
+                  <span
+                    class="btn btn-dark"
+                    *ngIf="ChangeToInput_One"
+                    (click)="Add_New_Catg()"
+                  >
+                    <i class="bi bi-plus-circle"></i>
+                  </span>
+                  <span
+                    class="btn btn-dark"
+                    *ngIf="ChangeToInput_Tow"
+                    (click)="Retrun_Catg()"
+                  >
+                    <i class="bi bi-arrow-90deg-left"></i>
+                  </span>
+                </div>
+              </div>
+              <div class="col" *ngIf="BtnFunChangeCnss2 != false">
+                <span style="font-size: 13px"> <b>CNSS ? </b></span>
+                <input
+                  type="text"
+                  readonly
+                  [value]="employe.cnss"
+                  name=""
+                  class="form-control"
+                  id=""
+                />
+                <a type="button" class="DownlaodImg" (click)="FunChangeCnss()"
+                  >Modifier Matricule CNSS
+                </a>
+              </div>
+              <div class="col" *ngIf="BtnFunChangeCnss">
+                <label for="" class=""
+                  ><span style="font-size: 13px"> <b>CNSS ? </b></span>
+                </label>
+                <div class="input-group">
+                  <span
+                    class="btn btn-danger"
+                    (click)="FunDesactiveChangeCnss()"
+                  >
+                    <i class="bi bi-x-circle"></i>
+                  </span>
+                  <input
+                    type="text"
+                    name="employe.cnss"
+                    [(ngModel)]="this.employe.cnss"
+                    placeholder="Matricule Cnss "
+                    ame=""
+                    class="form-control"
+                    id=""
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <div class="row">
+            <div class="col">
+              <button class="btn btn-dark">
+                <i class="bi bi-pencil-fill"></i>
+                Modifier
+              </button>
+              <span
+                class="btn btn-warning BtnCancel"
+                (click)="Close_Page_Delete()"
+              >
+                <i class="bi bi-x-circle"></i>
+                Annuler
+              </span>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

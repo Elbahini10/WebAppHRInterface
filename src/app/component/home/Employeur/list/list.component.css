@@ -1,0 +1,63 @@
+span{
+    margin: 5px;
+    cursor: pointer;
+}
+.BtnFunction button , span{
+    width: 48%;
+    margin: 2px;
+}
+.BtnFunctionPrint button{
+    width: 100%;
+    margin: 2px;
+}
+.Search{
+    width: 30%;
+}
+.NewEmploye{
+    position: relative;
+    left: 2%
+}
+
+.tableEmployeur tbody{
+    width: 100%;
+
+}
+
+
+.BtnExcel{
+    position: relative;
+  left: 100%;
+}
+.BackBtn{
+    position: relative;
+    left: 6%;
+    padding: 10px;
+}
+.tr
+{
+    font-size: 13px;
+}
+
+.tdBtn span
+{
+    margin: -2px;
+}
+
+tbody .FirstTd{
+    width: 7%;
+}
+
+table thead {
+    position: sticky;
+}
+table tbody{
+    max-height: 100px;
+}
+
+.spinner{
+    margin: 0 auto;
+    position: relative;
+    top: 63%;
+        z-index: 13;
+    left: 50%;
+  }

@@ -1,0 +1,87 @@
+<div>
+    <div class="row m-2">
+        <div class="col">
+            <h1 class="text">Remboursement Déstination</h1>
+        </div>
+    </div>
+    <hr>
+    <div class="row m-2">
+        <div class="col" *ngIf="MsgError">
+            <div class="alert alert-danger" *ngIf="MsgError">
+                <p> {{MsgError}} </p>
+            </div>
+        </div>
+        <div class="col" *ngIf="MsgValid">
+            <div class="alert alert-success" *ngIf="MsgValid">
+                <p> {{MsgValid}} </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row m-2">
+        <div class="col-3">
+            <div class="row">
+                <form [formGroup]="formsDestination" (submit)="get_all_Destination()">
+                <div class="card p-2">
+                    <div class="col m-2">
+                        <div class="input-group">
+                            <label for="" class="input-group-text">Mois : </label>
+                            <select formControlName="Months" class="form-select" id="">
+                                <option value="JANVIER">JANVIER</option>
+                                <option value="FÉVRIER">FÉVRIER</option>
+                                <option value="MARS">MARS</option>
+                                <option value="AVRIL">AVRIL</option>
+                                <option value="MAI">MAI</option>
+                                <option value="JUIN">JUIN</option>
+                                <option value="JUILLET">JUILLET</option>
+                                <option value="AOÛT">AOÛT</option>
+                                <option value="SEPTEMBRE">SEPTEMBRE</option>
+                                <option value="OCTOBRE">OCTOBRE</option>
+                                <option value="NOVEMBRE">NOVEMBRE</option>
+                                <option value="DÉCEMBRE">DÉCEMBRE</option>
+                            </select>
+                            <button class="btn btn-primary">Submit</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            </div>
+        </div>
+        <div class="col text-center">
+            <div class="card">
+                <div class="row m-2">
+                    <div class="col">
+                        <h1>REMBOURSEMENT DÉSTINATION {{DestinationTypes2}} MOIS {{Months}} {{date.getFullYear()}} </h1>
+                    </div>
+                </div>
+                <table class="table">
+                    <thead class="table-dark">
+                        <tr>
+                            <td>Déstination</td>
+                            <td>Total Remboursement</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr  *ngFor="let dest of Destination">
+                            <td> {{dest.department}} </td>
+                            <td> {{Total}} MAD</td>
+                        </tr>
+                        <tr class="table-warning">
+                            <td> <b>Total :  </b> </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="card-footer text-start">
+                    <div class="row">
+                        <div class="col">
+                            <button  class="btn btn-danger" >
+                                <i class="bi bi-file-earmark-pdf"></i>
+                                Imprimer</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

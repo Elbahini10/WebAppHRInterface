@@ -1,0 +1,50 @@
+<div class="div">
+    <div class="card"  >
+        <div class="card-header">
+            <div class="row text-center">
+                <div class="col">
+                    <h1>Code de Confirmation</h1>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row" *ngIf="">
+                <div class="col">
+                    <div class="alert alert-danger">
+                        <p> </p>
+                    </div>
+                </div>
+            </div>
+
+            <form >
+                <div class="row">
+                    <div class="col-md-12 col-sm-12">
+                        <div class="input-group">
+                            <label for="" class="input-group-text">Code : </label>
+                            <input type="number" formControlName="mail" placeholder="Confirmation Code" class="form-control" id="">
+                            <span class="btn btn-dark">
+                                <i class="bi bi-person-circle"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 BtnFunction"><br>
+                        <a class="btn btn-warning" routerLink="/UpdatePassword">
+                            <i class="bi bi-box-arrow-in-right"></i>
+                            Submit
+                        </a>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="card-footer">
+            <div class="row text-center">
+                <div class="col">
+                    <p>&copy; Développer By Ismail El Bahini 2023 </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<router-outlet></router-outlet>

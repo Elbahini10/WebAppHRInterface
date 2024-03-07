@@ -1,0 +1,187 @@
+<div>
+    <div class="spinner-border text-primary spinner" *ngIf="spinner" role="status">
+        <span class="visually-hidden">Loading...</span>
+    </div>
+    <div class="row m-2">
+        <div class="col">
+            <h1 class="text">Liste des Employés</h1>
+        </div>
+    </div>
+    <hr>
+
+    <div class="row m-2" *ngIf="MsgError">
+        <div class="col">
+            <div class="alert alert-danger">
+                <p> {{MsgError}} </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row m-2">
+        <div class="col">
+            <form [formGroup]="FormsGroups" (submit)="SearchForEmployeur()">
+                <div class="input-group Search">
+                    <label for="" class="input-group-text">Recherche : </label>
+                    <input type="search" placeholder="Matricule / Cin " formControlName="McSearch" class="form-control"
+                        id="">
+                    <button class="btn btn-primary"><i class="bi bi-search"></i></button>
+                </div>
+            </form>
+        </div>
+        <div class="col-2 ms-2 NewEmploye">
+            <a class="btn btn-success" routerLink="/home/CreateEmploye">
+                <i class="bi bi-person-plus"></i>
+                Nouvel Employé</a>
+        </div>
+    </div>
+    <hr>
+    <div class="row m-2">
+        <div class="col-3">
+            <div class="card">
+               <div class="row m-2">
+                <form [formGroup]="FormsGroups" (submit)="find_By_Filtre()">
+                    <div class="row">
+                        <div class="col">
+                            <form [formGroup]="FormsGroups">
+                                <div class="input-group">
+                                    <label for="" class="input-group-text">Département : </label>
+                                    <select required="true" formControlName="Mc" (change)="find_Services()"
+                                        class="form-select" id="">
+                                        <option *ngFor="let dep of Department" [value]="dep"> {{dep}} </option>
+                                    </select>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col"><br>
+                            <form>
+                                <div class="input-group">
+                                    <label for="" class="input-group-text">Service : </label>
+                                    <select required="true" formControlName="Mc2" class="form-select" id="">
+                                        <option *ngFor="let serv of Services" [value]="serv"> {{serv}} </option>
+                                    </select>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col"><br>
+                            <form>
+                                <div class="input-group">
+                                    <label for="" class="input-group-text">Etat : </label>
+                                    <select required="true" formControlName="Mc3" class="form-select" id="">
+                                        <option *ngFor="let etat of Etat" [value]="etat"> {{etat}} </option>
+                                    </select>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+    
+                    <div class="row">
+                        <div class="col BtnFunction"><br>
+                            <span class="btn btn-warning" (click)="Func_Cancel_Filtre()">
+                                <i class="bi bi-x-circle"></i>
+                                Annuler</span>
+    
+                                <span  class="btn btn-danger" (click)="print__employeur()">
+                                    <i class="bi bi-file-earmark-pdf"></i>
+                                    Imprimer</span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col BtnFunctionPrint">
+                            <button class="btn btn-dark">
+                                <i class="bi bi-funnel"></i>
+                                Filtrer</button>
+                        </div>
+                    </div>
+                </form>
+               </div>
+            </div>
+        </div>
+        <div class="col"  #Table_Employeur_PDF >
+            <div class="card">
+              <div class="row m-2">
+                <table class="table text-center tableEmployeur"> 
+                    <thead class="table-light thead">
+                        <tr>
+                            <td (click)="Order_By_Matricul()"  style="cursor: pointer;">Matricule 
+                                <i class="bi bi-caret-up"  (click)="Order_By_Matricul_Asc()" *ngIf="Img_Asc"></i> 
+                                <i class="bi bi-caret-down" (click)="Order_By_Matricul_Desc()" *ngIf="Img_Desc"></i>
+                            </td>
+                            <td>Prénom</td>
+                            <td>Nom</td>
+                            <td>Cin</td>
+                            <td>Department</td>
+                            <td>QUALIF</td>
+                            <td>Etat</td>
+                            <td>Action</td>
+                        </tr>
+                    </thead>
+                    <tbody  class="tbody">
+                        <tr *ngFor="let empl of employeur" class="tr" 
+                            [ngClass]="
+                            {  'table table-warning': ((id_empl === empl.id && isTrueOrNot)  || TdChangeColor) } ">
+                            <td> {{ empl.registrationnumber}} </td>
+                            <td> {{ empl.firstname}} </td>
+                            <td> {{ empl.lastname}} </td>
+                            <td> {{ empl.cin}} </td>
+                            <td> {{ empl.department}} </td>
+                            <td> {{ empl.fonction}}</td>
+                            <td> {{ empl.etat}} </td>
+                            <td  [ngClass]="{'tdBtn': id_empl === empl.id}">
+                                <span title="Profile" (click)="Show_Profile_Employeur(empl.id)"
+                                    *ngIf="FirstCheckEvent!==true?'disabled':''" class="text-success"><i
+                                        class="bi bi-info-circle"></i></span>
+                                <span title="Modifier" (click)="Update_Employe(empl.id)" class="text-dark"
+                                    *ngIf="FirstCheckEvent!==true?'disabled':''"><i class="bi bi-pencil"></i></span>
+                                <span title="Supprimer" (click)="Delete_Employe(empl.id)" class="text-danger"><i
+                                        class="bi bi-trash"></i></span>
+                            </td>
+    
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="row">
+                    <div class="col-6">
+                        <nav aria-label="Page navigation example" style="cursor: pointer; float: left;">
+                            <ul class="pagination">
+                                <li class="page-item" [ngClass]="{ 'disabled': this.page === 0 }">
+                                    <a class="page-link" (click)="GoToPage(this.page - 1)">Previous</a>
+                                </li>
+                                <ng-container *ngFor="let i of getDisplayedPages()">
+                                    <li class="page-item" [ngClass]="{ 'active': i === this.page }">
+                                        <a class="page-link" (click)="GoToPage(i)">{{ i + 1 }}</a>
+                                    </li>
+                                </ng-container>
+                                <li class="page-item" [ngClass]="{ 'disabled': this.page === this.totalPage - 1 }">
+                                    <a class="page-link" (click)="GoToPage(this.page + 1)">Next</a>
+                                </li>
+                            </ul>
+                        </nav>
+                       
+                    </div>
+    
+                </div>
+              </div>
+            </div>
+        </div>
+    </div>
+
+    <app-profile *ngIf="this.EmployeurServices.Btn_Show_Profile"></app-profile>
+    <app-delete-employeur *ngIf="this.EmployeurServices.Btn_Delete"></app-delete-employeur>
+    <app-update-employeur *ngIf="this.EmployeurServices.Btn_Update_Profile"></app-update-employeur>
+    <app-result-not-found *ngIf="this.EmployeurServices.Btn_Data_Not_Found"></app-result-not-found>
+
+
+
+
+    
+
+
+</div>
+
+
+
+<router-outlet></router-outlet>

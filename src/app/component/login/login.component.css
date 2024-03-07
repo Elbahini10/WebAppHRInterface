@@ -1,0 +1,17 @@
+
+.div{
+    width: 40%;
+    margin: 0 auto;
+}
+
+.alert-danger i {
+    float: right;
+    cursor: pointer;
+    margin-top: -30px;
+}
+
+.a{
+    cursor: pointer;
+    color: blue;
+    text-decoration: underline;
+}

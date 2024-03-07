@@ -1,0 +1,102 @@
+<div class="BackGround">
+    <div class="div">
+        <div class="card Cards">
+            <div class="card-header">
+             <div class="row">
+                <div class="col">
+                    <div class="profileUser">
+                        <h1>Profile : </h1>
+                    </div>
+                </div>
+             </div>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col">
+                        <label for="">Image Profile : </label>
+                       <div class="input-group">
+                            <input type="file" name="" accept=".PNG,.JPG" class="form-control" id="">
+                        </div>
+                        <a type="button" class="DownlaodImg" >Télécharger  Image </a>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col">
+                       <div class="input-group">
+                            <ng-container ></ng-container>
+                            <label for="" class="input-group-text">Prénom : </label>
+                            <input type="text" name="" placeholder="Firstname" class="form-control" id="">
+                       </div>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col">
+                       <div class="input-group">
+                            <label for="" class="input-group-text">Nom : </label>
+                            <input type="text" name="" placeholder="Lastname" class="form-control" id="">
+                       </div>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col">
+                       <div class="input-group">
+                            <label for="" class="input-group-text">E-mail : </label>
+                            <input type="email" name="" placeholder="Email" class="form-control" id="">
+                       </div>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col">
+                       <div class="input-group">
+                            <label for="" class="input-group-text">Rôles : </label>
+                            <input type="text" readonly name="" placeholder="Roles" class="form-control" id="">
+                       </div>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col">
+                       <div class="input-group">
+                            <label for="" class="input-group-text">Mot de passe : </label>
+                            <input [type]="inputTypes" name="" placeholder="Password" class="form-control" id="">
+                            <button type="button" class="btn btn-dark">
+                                <i *ngIf="inputTypes==='password'" (click)="ChangeInputToText()" class="bi bi-eye"></i>
+                                <i *ngIf="inputTypes==='text'" (click)="ChangeInputToPassword()" class="bi bi-eye-slash"></i>
+                            </button>
+                       </div>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col">
+                       <div class="input-group">
+                            <label for="" class="input-group-text">Confirmez le mot de passe : </label>
+                            <input [type]="inputTypes" name="" placeholder="Confirm password" class="form-control" id="">
+                            <button type="button" class="btn btn-dark">
+                                <i *ngIf="inputTypes==='password'" (click)="ChangeInputToText()" class="bi bi-eye"></i>
+                                <i *ngIf="inputTypes==='text'" (click)="ChangeInputToPassword()" class="bi bi-eye-slash"></i>
+                            </button>
+                       </div>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col BtnFunction">
+                        <button class="btn btn-primary">
+                            <i class="bi bi-pencil"></i>
+                            Modifier
+                        </button>
+                        <button class="btn btn-warning" (click)="Close_My_Profile()" >
+                            <i class="bi bi-x-circle"></i>
+                            Annluer
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

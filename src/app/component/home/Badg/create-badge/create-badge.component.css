@@ -1,0 +1,40 @@
+*{
+  list-style: none;
+}
+.TbodyTr{
+    position: relative;
+    top: -21%;
+  }
+
+  img{
+    width: 142%;
+  }
+nav ul{
+  display: flex;
+  gap: 6%;
+}
+nav ul li{
+  width: 9%;
+}
+.nav{
+  margin-left: -33px;
+}
+.h4{
+  margin-top: -11px;
+}
+.p{
+  margin-top: -12px;
+}
+
+.FormsBadgs{
+  max-height: 300px;
+  overflow-y: scroll;
+}
+
+
+.ImgQrCode img{
+  width: 20%;
+  float: right;
+  margin-top: -85px;
+  margin-right: 12px;
+}

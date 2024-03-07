@@ -1,0 +1,33 @@
+.DownlaodImg{
+    font-size: 16px;
+}
+.MSG_ERR
+{
+    font-size: 14px;
+}
+
+
+
+.BackGround{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    background-color: #1f1f1f52;
+    z-index: 11;
+  }
+
+  .spinner{
+    display: block;
+    margin: 0 auto;
+    position: relative;
+    top: 50%;
+  }
+
+  .spanURL{
+    color: #3c8bff;
+    text-decoration: underline;
+    cursor: pointer;
+  }

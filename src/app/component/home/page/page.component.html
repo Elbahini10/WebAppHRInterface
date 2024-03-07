@@ -1,0 +1,26 @@
+<div class="div">
+<div class="row m-2">
+    <div class="col-5">
+      <div class="card">
+        <div class="card-header"> <h1 class="m-2">Total Employé : {{TotalEmploye}} </h1> </div>
+        <div class="card-body">
+          <table class="table text-center">
+            <thead class="table-dark">
+              <tr>
+                <th class="text-left">Département</th>
+                <th>Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let dep of Departement">
+                <td> {{dep[0]}} </td>
+                <td> {{dep[1]}} </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

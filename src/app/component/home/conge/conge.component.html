@@ -1,0 +1,369 @@
+<div class="div">
+    <div class="row m-2">
+        <div class="col">
+            <h1 class="text">Etat Congé</h1>
+        </div>
+    </div>
+    <hr>
+    <div class="row m-2">
+        <div class="col" *ngIf="MsgError">
+            <div class="alert alert-danger" *ngIf="MsgError">
+                <p> {{MsgError}} </p>
+            </div>
+        </div>
+        <div class="col" *ngIf="MsgValid">
+            <div class="alert alert-success" *ngIf="MsgValid">
+                <p> {{MsgValid}} </p>
+            </div>
+        </div>
+    </div>
+    <!-- Filtre Employeur  -->
+    <div class="row m-2">
+        <form [formGroup]="FormsConge" (change)="find_employer_by_forms_search()">
+            <div class="col-12">
+                <div class="card">
+                    <div class="row m-2">
+                        <div class="col">
+                            <div class="input-group">
+                                <label for="" class="input-group-text">Département : </label>
+                                <select required="true" formControlName="Mc" (change)="find_Services()"
+                                    class="form-select" id="">
+                                    <option *ngFor="let dep of Department" [value]="dep"> {{dep}} </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="input-group">
+                                <label for="" class="input-group-text">Service : </label>
+                                <select required="true" formControlName="Mc2"
+                                    (change)="find_employeur_by_fonction_departement()" class="form-select" id="">
+                                    <option *ngFor="let serv of Services" [value]="serv"> {{serv}} </option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col">
+                            <div class="input-group">
+                                <label for="" class="input-group-text">Employeur : </label>
+                                <select required="true" formControlName="Mc3" class="form-select" id="">
+                                    <option *ngFor="let empl of employeur" [value]="empl.id"> {{empl.firstname}}
+                                        {{empl.lastname}} </option>
+                                </select>
+                            </div>
+                        </div>
+                        <!-- <div class="col offset-1"></div>
+                        <div class="col">
+                            <button class="btn btn-primary">
+                                Submit
+                            </button>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="row m-2">
+
+        <div class="card p-3">
+            <div class="row offset-1">
+                <div class="col">
+                    <div class="input-group">
+                        <label for="" class="input-group-text">Congé : </label>
+                        <form [formGroup]="FormsConge">
+                            <select formControlName="CongeTypes" class="form-select" (change)="Func_Change_Conge()"
+                                id="">
+                                <option value="CA">Congé Annuel</option>
+                                <option value="CR">Congé Récuperer</option>
+                                <option value="JR">Jour Récuperer</option>
+                            </select>
+                        </form>
+                        <button class="btn btn-dark" (click)="Func_Add()"> <i class="bi bi-plus-circle"></i> </button>
+                    </div>
+                </div>
+                <div class="col"></div>
+                <div class="col"></div>
+                <div class="col">
+                    <button class="btn btn-success" (click)="Fun_Btn_Add_Recup()"><i class="bi bi-plus-circle"></i>
+                        Prenez Journée</button>
+                </div>
+            </div>
+
+            <div class="card m-2" *ngIf="CongeAnnuel">
+                <div class="card-header">
+                    <h1> Congé Annuel </h1>
+                </div>
+                <div class="card-body">
+                    <div class="card">
+                        <div class="row m-2">
+                            <div class="col">
+                                <div class="input-group">
+                                    <label for="" class="input-group-text"> Anneés </label>
+                                    <input readonly name="" [value]="this.data.getFullYear()" class="form-control"
+                                        id="">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="input-group">
+                                    <label for="" class="input-group-text"> Droit Congé </label>
+                                    <input readonly name="" class="form-control" id="">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="input-group">
+                                    <label for="" class="input-group-text"> Total Congé </label>
+                                    <input readonly name="" [value]="this.TotalCongeAnnuel" class="form-control" id="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row ">
+                        <table class="table text-center">
+                            <thead class="table-dark">
+                                <tr>
+                                    <td>Matricule </td>
+                                    <td>Prénom</td>
+                                    <td>Nom</td>
+                                    <td>Department</td>
+                                    <td>SERVICE</td>
+                                    <td>Date</td>
+                                    <td>Nombres Jours</td>
+                                    <td>Observation</td>
+                                    <td>Action</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let con of congeAnnuel">
+                                    <td> {{this.datas.registrationnumber}} </td>
+                                    <td> {{this.datas.firstname}}</td>
+                                    <td> {{this.datas.lastname}}</td>
+                                    <td> {{this.datas.department}}</td>
+                                    <td> {{this.datas.fonction}}</td>
+                                    <td> {{con.dateRecup}}</td>
+                                    <td> {{con.nbJourRecup}} </td>
+                                    <td> {{con.observation}} </td>
+                                    <td>
+                                        <span title="Profile" class="text-success"><i
+                                                class="bi bi-info-circle"></i></span>
+                                        <span title="Modifier" class="text-dark"><i class="bi bi-pencil"></i></span>
+                                        <span title="Supprimer" lass="text-danger"><i class="bi bi-trash"></i></span>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!-- Congé Récuperer -->
+            <div class="card m-2" *ngIf="CongeRecuperer">
+                <div class="card-header">
+                    <h1> Congé Récupérés </h1>
+                </div>
+                <div class="card-body">
+                    <div class="card">
+                        <div class="row m-2">
+                            <div class="col">
+                                <div class="input-group">
+                                    <label for="" class="input-group-text"> Anneés </label>
+                                    <input readonly name="" [value]="this.data.getFullYear()" class="form-control"
+                                        id="">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="input-group">
+                                    <label for="" class="input-group-text"> Droit Congé </label>
+                                    <input readonly name="" class="form-control" id="">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="input-group">
+                                    <label for="" class="input-group-text"> Total Congé </label>
+                                    <input readonly name="" [value]="SoldeDays" class="form-control" id="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row ">
+                        <table class="table text-center">
+                            <thead class="table-dark">
+                                <tr>
+                                    <td>Matricule </td>
+                                    <td>Prénom</td>
+                                    <td>Nom</td>
+                                    <td>Department</td>
+                                    <td>SERVICE</td>
+                                    <td>Date Début</td>
+                                    <td>Date Fin</td>
+                                    <td>Jour</td>
+                                    <td>Observation</td>
+                                    <td>Action</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let con of congeRecupe">
+                                    <td> {{this.datas.registrationnumber}} </td>
+                                    <td> {{this.datas.firstname}}</td>
+                                    <td> {{this.datas.lastname}}</td>
+                                    <td> {{this.datas.department}}</td>
+                                    <td> {{this.datas.fonction}}</td>
+                                    <td> {{con.dateDebutRecup}}</td>
+                                    <td> {{con.dateFinRecup}}</td>
+                                    <td> {{con.nbJourRecup}} </td>
+                                    <td> {{con.observation}} </td>
+                                    <td>
+                                        <span title="Profile" class="text-success"><i
+                                                class="bi bi-info-circle"></i></span>
+                                        <span title="Modifier" class="text-dark"><i class="bi bi-pencil"></i></span>
+                                        <span title="Supprimer" lass="text-danger"><i class="bi bi-trash"></i></span>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!-- Jours Récuperer -->
+            <div class="card m-2" *ngIf="JourRecuper">
+                <div class="card-header">
+                    <h1> Jours Récupérés </h1>
+                </div>
+                <div class="card-body">
+                    <div class="card">
+                        <div class="row m-2">
+                            <div class="col">
+                                <div class="input-group">
+                                    <label for="" class="input-group-text"> Anneés </label>
+                                    <input readonly name="" [value]="this.data.getFullYear()" class="form-control"
+                                        id="">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="input-group">
+                                    <label for="" class="input-group-text"> Droit Congé </label>
+                                    <input readonly name="" class="form-control" id="">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="input-group">
+                                    <label for="" class="input-group-text"> Total Congé </label>
+                                    <input readonly name="" [value]="SoldeDays" class="form-control" id="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row ">
+                        <table class="table text-center">
+                            <thead class="table-dark">
+                                <tr>
+                                    <td>Matricule </td>
+                                    <td>Prénom</td>
+                                    <td>Nom</td>
+                                    <td>Department</td>
+                                    <td>SERVICE</td>
+                                    <td>Date Début</td>
+                                    <td>Date Fin</td>
+                                    <td>Jour</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let con1 of JoursRecupe">
+                                    <td> {{this.datas.registrationnumber}} </td>
+                                    <td> {{this.datas.firstname}}</td>
+                                    <td> {{this.datas.lastname}}</td>
+                                    <td> {{this.datas.department}}</td>
+                                    <td> {{this.datas.fonction}}</td>
+                                    <td> {{con1.dateDebut}}</td>
+                                    <td> {{con1.dateFin}} </td>
+                                    <td> {{con1.nbJour}} </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Add Conge -->
+            <div class="card m-2" *ngIf="Add">
+                <div class="card-header">
+                    <h1>Neveaux Jour Récuperer</h1>
+                </div>
+                <div class="card-body">
+                    <div class="card-body">
+                        <form [formGroup]="FormsConge" (submit)="func_add_conge()">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="input-group">
+                                        <label for="" class="input-group-text">Matricule : </label>
+                                        <input type="text" [value]="this.datas.registrationnumber" name="" readonly
+                                            class="form-control" id="">
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="input-group">
+                                        <label for="" class="input-group-text">Prénom & Nom: </label>
+                                        <input type="text" name=""
+                                            [value]="this.datas.firstname +''+this.datas.lastname" readonly
+                                            class="form-control" id="">
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="input-group">
+                                        <label for="" class="input-group-text">Département : </label>
+                                        <input type="text" name="" [value]="this.datas.department" readonly
+                                            class="form-control" id="">
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="input-group">
+                                        <label for="" class="input-group-text">Fonction : </label>
+                                        <input type="text" name="" [value]="this.datas.fonction" readonly
+                                            class="form-control" id="">
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="input-group">
+                                        <label for="" class="input-group-text">Date Début : </label>
+                                        <input type="date" formControlName="dateDebutRecup" name="" class="form-control"
+                                            id="">
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="input-group">
+                                        <label for="" class="input-group-text">Date Fin : </label>
+                                        <input type="date" formControlName="dateFinRecup" name="" class="form-control"
+                                            id="">
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="input-group">
+                                        <div class="form-floating">
+                                            <textarea class="form-control" formControlName="obs"
+                                                placeholder="Leave a comment here" id="floatingTextarea2"
+                                                style="height: 100px"></textarea>
+                                            <label for="floatingTextarea2">Obsérvation : </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <button class="btn btn-success">Submit</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <app-add-conge *ngIf="this.congeServices.Btn_Add_Recuperation"></app-add-conge>
+
+    </div>
+</div>
