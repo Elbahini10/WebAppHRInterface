@@ -276,8 +276,13 @@ export class AddComponent implements OnInit {
                 if (!g) {
                   this.EmployeurServices.Create_Employeur(data).subscribe(
                     (d) => {
-                      this.divSpinner = true;
-                      this.router.navigateByUrl('home/ListEmploye');
+                      if(d)
+                      {
+                        setInterval(() => {
+                          this.divSpinner = true;
+                        },2000)
+                        this.router.navigateByUrl('home/ListEmploye');
+                      }
                     },
                     (err) => {
                       this.MsgError = err;

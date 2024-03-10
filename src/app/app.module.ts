@@ -40,6 +40,7 @@ import { DestinationComponent } from './component/remboursement-mutuel/destinati
 import { PageComponent } from './component/home/page/page.component';
 import { BordereauxEnvoiComponent } from './component/remboursement-mutuel/bordereaux-envoi/bordereaux-envoi.component';
 import { SalaireEmployeurComponent } from './component/home/Employeur/salaire-employeur/salaire-employeur.component';
+import { AlertSuccessComponent } from './component/home/alert/alert-success/alert-success.component';
 
 
 
@@ -110,6 +111,7 @@ const route: Routes = [
     PageComponent,
     BordereauxEnvoiComponent,
     SalaireEmployeurComponent,
+    AlertSuccessComponent,
   ],
   imports: [
     BrowserModule,

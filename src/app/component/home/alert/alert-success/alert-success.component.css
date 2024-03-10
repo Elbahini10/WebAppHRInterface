@@ -1,0 +1,36 @@
+
+.BackGround{
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  background-color: #e3e3e352;
+  z-index: 11;
+}
+
+.card{
+  height: 100%;
+}
+.card-body{
+  height: inherit;
+}
+.Msg-Alert{
+  font-size: 20px;
+}
+.div{
+  width: 40%;
+  margin: 0 auto;
+  margin-top: 180px;
+}
+
+.BtnConfirm,.BtnCancel
+{
+  width: 25%;
+  font-size: 15px;
+  margin-left: 10px;
+}
+ .icons{
+  font-size: 100px;
+}
